@@ -1,0 +1,60 @@
+.aboutContainer {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+.title {
+    margin-left: 20px;
+    margin-bottom: 30px;
+    color: var(--Blue-Grey-Blue-Grey-700, #334E68);
+    font-family: Inter;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.titleContainer {
+    margin-bottom: 30px;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;  
+}
+
+.titleContainer p {
+    margin-bottom: 5px;
+}
+ .PortfolioContainer {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+ }
+
+ .PortfolioContainer a {
+    color: #334E68;
+    &:hover, &:focus {
+        color: #127FBF;
+    }
+ }
+
+ .EmailContainer {
+    margin-bottom: 30px;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+ }
+
+ .EmailContainer a {
+    display: block;
+    margin-top: 10px;
+    color: #334E68;
+    &:hover, &:focus {
+        color: #127FBF;
+    }
+ }

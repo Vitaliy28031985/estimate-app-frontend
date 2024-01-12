@@ -1,0 +1,94 @@
+.projectContainer {
+display: grid;
+grid-template-columns: 300px;
+grid-gap: 18px;
+margin-top: 30px;
+@media screen and (min-width: 768px) {
+grid-row-gap: 8px;
+grid-template-columns: 330px 320px;
+grid-gap: 18px;
+} 
+@media screen and (min-width: 1200px) {
+grid-row-gap: 8px;
+grid-template-columns: 330px 320px 320px;
+grid-gap: 18px;
+    }   
+    
+}
+.projectItem {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #633BBC;
+    border-radius: 20px;
+    box-shadow: 0px 16px 24px -8px rgba(16, 24, 40, 0.03), 0px 48px 64px -16px rgba(16, 24, 40, 0.08);
+    @media screen and (min-width: 768px) {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 40px;
+        padding-right: 40px; 
+    }
+}
+.projectTitle {
+color: #04D361;
+font-family: Inter;
+font-size: 48px;
+font-style: normal;
+font-weight: 500;
+}
+.titleContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.titleContainer button {
+    background: transparent;
+    border-color: transparent;
+}
+.projectDescription {
+    margin-bottom: 10px;
+font-family: Inter;
+font-size: 22px;
+font-weight: 400;
+color: #FFF;
+}
+.projectPrice {
+    margin-bottom: 20px;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 400;
+    color: #FFF; 
+}
+
+.projectLink {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: Inter;
+    font-size: 22px;
+    font-weight: 400;
+    color: #633BBC;
+    background: #FFF;
+    border-width: 0;
+    border-radius: 10px;
+    transition: color 500ms  cubic-bezier(0.4, 0, 0.2, 1),  background 500ms  cubic-bezier(0.4, 0, 0.2, 1);
+    &:hover, &:focus {
+        color: #FFF;
+        background:  #633BBC; 
+    }
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+   gap: 10px;
+}
+ .addButton svg {
+    fill: black;
+    transition: fill 250ms  cubic-bezier(0.4, 0, 0.2, 1); 
+     &:hover, &:focus {
+      fill: #334E68;    
+      } 
+ }

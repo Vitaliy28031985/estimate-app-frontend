@@ -1,0 +1,50 @@
+.infoTitle {
+    margin-top: 20px;
+    margin-bottom: 24px;
+    font-family: Inter;
+    font-size: 28px;
+    font-weight: 400;
+    color: #0b131a;
+}
+.ifoContainer {
+padding: 25px 12px;
+border-radius: 0px 40px 40px 0px;
+background: #FFF;
+box-shadow: 7px 4px 14px 0px rgba(49, 21, 4, 0.07);
+@media screen and (min-width: 768px) {
+    padding: 40px 16px; 
+}
+@media screen and (min-width: 1200px) {
+    padding: 40px 22px; 
+  }
+}
+.profileContainerPhoto {
+    width: 233px;
+    height: 233px;
+    margin-bottom: 38px;
+    border-radius: 50%;
+    overflow: hidden;
+@media screen and (min-width: 768px) {
+    width: 180px;
+    height: 180px;
+}
+
+@media screen and (min-width: 1200px) {
+    width: 233px;
+    height: 233px;
+}
+}
+
+.infoText {
+margin-bottom: 5px;    
+font-family: Inter;
+font-size: 18px;
+font-weight: 400;
+color: #0b131a;
+@media screen and (min-width: 768px) {
+    font-size: 22px; 
+}
+}
+.infoTextMins {
+ margin-left: 10px;   
+}
