@@ -25,12 +25,12 @@ function Register({showRegister, forModal}) {
 
 const dispatch = useDispatch();
 const [singup, { isLoading }] = useSignupMutation();
-const [login, ] = useLoginMutation();
+// const [login, ] = useLoginMutation();
 
-const loginEl = {
-    password,
-    email
-  };
+// const loginEl = {
+//     password,
+//     email
+//   };
 
     const handleChange = e => {
         const {name, value,} = e.currentTarget;
@@ -73,10 +73,10 @@ const loginEl = {
 
     try {
         const user = await singup(registerEl).unwrap();
-        const dataAnswers = await login(loginEl).unwrap();
+        // const dataAnswers = await login(loginEl).unwrap();
         dispatch(setCredentials(user));
-        dispatch(projectsApi.util.resetApiState());
-        dispatch(priceApi.util.resetApiState());
+        // dispatch(projectsApi.util.resetApiState());
+        // dispatch(priceApi.util.resetApiState());
         toast("Реєстрація пройшла успішно");
       } catch (error) {
         toast('Sorry, something went wrong', error);

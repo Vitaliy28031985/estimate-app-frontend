@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/estimate-app-frontend/static/css/main.92838cc1.css",
+    "main.js": "/estimate-app-frontend/static/js/main.6b9e33af.js",
+    "Home.js": "/estimate-app-frontend/static/js/Home.e86f7e00.chunk.js",
+    "About.css": "/estimate-app-frontend/static/css/About.c12afa07.chunk.css",
+    "About.js": "/estimate-app-frontend/static/js/About.b54ce637.chunk.js",
+    "Price.css": "/estimate-app-frontend/static/css/Price.6aaf63fe.chunk.css",
+    "Price.js": "/estimate-app-frontend/static/js/Price.2d52885b.chunk.js",
+    "Profile.css": "/estimate-app-frontend/static/css/Profile.76be3522.chunk.css",
+    "Profile.js": "/estimate-app-frontend/static/js/Profile.08feba40.chunk.js",
+    "Projects.css": "/estimate-app-frontend/static/css/Projects.cf7ec476.chunk.css",
+    "Projects.js": "/estimate-app-frontend/static/js/Projects.9f56ee2c.chunk.js",
+    "Project.css": "/estimate-app-frontend/static/css/Project.16e64894.chunk.css",
+    "Project.js": "/estimate-app-frontend/static/js/Project.57dc2829.chunk.js",
+    "static/js/787.35fc0bbb.chunk.js": "/estimate-app-frontend/static/js/787.35fc0bbb.chunk.js",
+    "index.html": "/estimate-app-frontend/index.html",
+    "main.92838cc1.css.map": "/estimate-app-frontend/static/css/main.92838cc1.css.map",
+    "main.6b9e33af.js.map": "/estimate-app-frontend/static/js/main.6b9e33af.js.map",
+    "Home.e86f7e00.chunk.js.map": "/estimate-app-frontend/static/js/Home.e86f7e00.chunk.js.map",
+    "About.c12afa07.chunk.css.map": "/estimate-app-frontend/static/css/About.c12afa07.chunk.css.map",
+    "About.b54ce637.chunk.js.map": "/estimate-app-frontend/static/js/About.b54ce637.chunk.js.map",
+    "Price.6aaf63fe.chunk.css.map": "/estimate-app-frontend/static/css/Price.6aaf63fe.chunk.css.map",
+    "Price.2d52885b.chunk.js.map": "/estimate-app-frontend/static/js/Price.2d52885b.chunk.js.map",
+    "Profile.76be3522.chunk.css.map": "/estimate-app-frontend/static/css/Profile.76be3522.chunk.css.map",
+    "Profile.08feba40.chunk.js.map": "/estimate-app-frontend/static/js/Profile.08feba40.chunk.js.map",
+    "Projects.cf7ec476.chunk.css.map": "/estimate-app-frontend/static/css/Projects.cf7ec476.chunk.css.map",
+    "Projects.9f56ee2c.chunk.js.map": "/estimate-app-frontend/static/js/Projects.9f56ee2c.chunk.js.map",
+    "Project.16e64894.chunk.css.map": "/estimate-app-frontend/static/css/Project.16e64894.chunk.css.map",
+    "Project.57dc2829.chunk.js.map": "/estimate-app-frontend/static/js/Project.57dc2829.chunk.js.map",
+    "787.35fc0bbb.chunk.js.map": "/estimate-app-frontend/static/js/787.35fc0bbb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92838cc1.css",
+    "static/js/main.6b9e33af.js"
+  ]
+}
