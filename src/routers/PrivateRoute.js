@@ -5,5 +5,5 @@ import { selectIsLoggedIn } from '../redux/auth/authSlice';
 export const PrivateRoute = ({ children }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  return <>{isLoggedIn ? children : <Navigate to="/" />}</>;
+  return <>{isLoggedIn ? children : <Navigate to="estimate-app-frontend/" />}</>;
 };
