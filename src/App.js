@@ -33,13 +33,13 @@ function App() {
       <div className={s.container}>
       <Suspense fallback={<LoaderComponent/>}>
   <Routes>
-        <Route path="estimate-app-frontend/" element={<PublicRouter><Home /></PublicRouter>} />
-        <Route path="estimate-app-frontend/about" element={<PublicRouter><About /></PublicRouter>} />
+        <Route path="/" element={<PublicRouter><Home /></PublicRouter>} />
+        <Route path="/about" element={<PublicRouter><About /></PublicRouter>} />
         
-        <Route path="estimate-app-frontend/price" element={<PrivateRoute><Price /></PrivateRoute>} />
-        <Route path="estimate-app-frontend/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
-        <Route path="estimate-app-frontend/projects" element={<PrivateRoute><Projects/></PrivateRoute>} />
-        <Route path="estimate-app-frontend/projects/:id" element={<PrivateRoute><Project/></PrivateRoute>}/>
+        <Route path="/price" element={<PrivateRoute><Price /></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path="/projects" element={<PrivateRoute><Projects/></PrivateRoute>} />
+        <Route path="/projects/:id" element={<PrivateRoute><Project/></PrivateRoute>}/>
         <Route path="*" element={<p>page not found</p>} />
       </Routes>
       </Suspense>
@@ -49,3 +49,4 @@ function App() {
 }
 
 export default App;
+//estimate-app-frontend /estimate-app-frontend
