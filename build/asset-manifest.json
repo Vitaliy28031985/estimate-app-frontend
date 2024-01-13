@@ -1,12 +1,7 @@
 {
   "files": {
-<<<<<<< HEAD
     "main.css": "/estimate-app-frontend/static/css/main.92838cc1.css",
-    "main.js": "/estimate-app-frontend/static/js/main.8fa3b296.js",
-=======
-    "main.css": "/estimate-app-frontend/static/css/main.cada816c.css",
-    "main.js": "/estimate-app-frontend/static/js/main.102134e9.js",
->>>>>>> 913c030d7473b0b370fa0acf520be7c1c7ed9bc5
+    "main.js": "/estimate-app-frontend/static/js/main.6b9e33af.js",
     "Home.js": "/estimate-app-frontend/static/js/Home.e86f7e00.chunk.js",
     "About.css": "/estimate-app-frontend/static/css/About.9dd64d28.chunk.css",
     "About.js": "/estimate-app-frontend/static/js/About.00bf4808.chunk.js",
@@ -20,13 +15,8 @@
     "Project.js": "/estimate-app-frontend/static/js/Project.012f6965.chunk.js",
     "static/js/787.35fc0bbb.chunk.js": "/estimate-app-frontend/static/js/787.35fc0bbb.chunk.js",
     "index.html": "/estimate-app-frontend/index.html",
-<<<<<<< HEAD
     "main.92838cc1.css.map": "/estimate-app-frontend/static/css/main.92838cc1.css.map",
-    "main.8fa3b296.js.map": "/estimate-app-frontend/static/js/main.8fa3b296.js.map",
-=======
-    "main.cada816c.css.map": "/estimate-app-frontend/static/css/main.cada816c.css.map",
-    "main.102134e9.js.map": "/estimate-app-frontend/static/js/main.102134e9.js.map",
->>>>>>> 913c030d7473b0b370fa0acf520be7c1c7ed9bc5
+    "main.6b9e33af.js.map": "/estimate-app-frontend/static/js/main.6b9e33af.js.map",
     "Home.e86f7e00.chunk.js.map": "/estimate-app-frontend/static/js/Home.e86f7e00.chunk.js.map",
     "About.9dd64d28.chunk.css.map": "/estimate-app-frontend/static/css/About.9dd64d28.chunk.css.map",
     "About.00bf4808.chunk.js.map": "/estimate-app-frontend/static/js/About.00bf4808.chunk.js.map",
@@ -41,12 +31,7 @@
     "787.35fc0bbb.chunk.js.map": "/estimate-app-frontend/static/js/787.35fc0bbb.chunk.js.map"
   },
   "entrypoints": [
-<<<<<<< HEAD
     "static/css/main.92838cc1.css",
-    "static/js/main.8fa3b296.js"
-=======
-    "static/css/main.cada816c.css",
-    "static/js/main.102134e9.js"
->>>>>>> 913c030d7473b0b370fa0acf520be7c1c7ed9bc5
+    "static/js/main.6b9e33af.js"
   ]
 }
