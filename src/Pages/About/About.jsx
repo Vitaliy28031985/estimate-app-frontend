@@ -15,12 +15,12 @@ function About() {
 </div>
 <div className={s.PortfolioContainer}>
   <p>Сайт створено та підтримується</p>
-  <a target="_blank" href="https://vitaliy28031985.github.io/Deploy-my-portfolio/">Vitalii Piddubchak</a>
+  <a target="_blank"  rel="noreferrer noopener" href="https://vitaliy28031985.github.io/Deploy-my-portfolio/">Vitalii Piddubchak</a>
 </div>
      
      <div className={s.EmailContainer}>
       <p>Cвої зауваження та пропозиції щодо роботи сервісу надсилайте на електронну адресу</p>
-      <a target="_blank" href="mailto:vitaliy_piddubchak@ukr.net">vitaliy_piddubchak@ukr.net</a>
+      <a target="_blank"  rel="noreferrer noopener"  href="mailto:vitaliy_piddubchak@ukr.net">vitaliy_piddubchak@ukr.net</a>
      </div>
      </div>
     );

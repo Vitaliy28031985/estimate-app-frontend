@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import { useGetProjectsQuery, useDeleteProjectMutation } from '../../redux/projectSlice/projectSlice';
 import Add from '../Icons/Add/Add';
 import AddProject from "../AddProject/AddProject";

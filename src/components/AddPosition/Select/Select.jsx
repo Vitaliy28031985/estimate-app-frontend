@@ -1,8 +1,7 @@
 import { useState} from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useGetPriceQuery} from "../../../redux/price/priceApi";
-import Close from "../../Icons/Close/Close";
 import s from "./Select.module.scss"
 
 function Select({isShowModal, add}) {
@@ -35,7 +34,7 @@ function Select({isShowModal, add}) {
 
  const handleSubmit = async e => {
   e.preventDefault();
-  if(title == 'empty' || unit === '' || number === '' || title === '') {
+  if(title === 'empty' || unit === '' || number === '' || title === '') {
     toast("Усі поля мають бути заповнені")
     return;
   }

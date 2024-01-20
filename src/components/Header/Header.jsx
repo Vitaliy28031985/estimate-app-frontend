@@ -2,7 +2,7 @@ import { NavLink,  useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useLogoutMutation} from "../../redux/auth/authApi";
-import { selectUser, unsetCredentials, selectIsLoggedIn } from '../../redux/auth/authSlice';
+import { unsetCredentials, selectIsLoggedIn } from '../../redux/auth/authSlice';
 import {priceApi} from "../../redux/price/priceApi";
 import {projectsApi} from "../../redux/projectSlice/projectSlice";
 import Burger from "../Icons/Burger/Burger";
@@ -12,8 +12,7 @@ import s from "./Header.module.scss"
 function Header({showRegister}) {
     const [showMenu, setShowMenu] = useState(false);
     const dispatch = useDispatch();
-    const [logout, { isLoading }] = useLogoutMutation();
-    const user = useSelector(selectUser);
+    const [logout] = useLogoutMutation();
     const isLoggedIn = useSelector(selectIsLoggedIn);
 
     let location = useLocation();

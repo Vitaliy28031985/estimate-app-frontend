@@ -11,7 +11,7 @@ import {
 
 import storage from 'redux-persist/lib/storage';
 
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
 import { authApi } from './auth/authApi';
 import { projectsApi } from './projectSlice/projectSlice';

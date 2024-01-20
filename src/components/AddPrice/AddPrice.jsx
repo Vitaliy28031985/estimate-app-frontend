@@ -10,7 +10,7 @@ function AddPrice({isShowModal}) {
     const [price, setPrice] = useState('');
 
     const {data} = useGetPriceQuery();
-    const [addPrice, { isLoading }] = useAddPriceMutation();
+    const [addPrice] = useAddPriceMutation();
 
     const handleChange = e => {
         const {name, value,} = e.currentTarget;

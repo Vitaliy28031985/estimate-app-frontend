@@ -16,7 +16,7 @@ function AuthorizationForm({showRegister, forModal}) {
 
 
     const dispatch = useDispatch();
-    const [login, { isLoading }] = useLoginMutation();
+    const [login] = useLoginMutation();
     
     const loginEl = {
       password,

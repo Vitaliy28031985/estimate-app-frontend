@@ -15,7 +15,7 @@ const [showModal, serShowModal] = useState(false);
     serShowModal(showModal => !showModal);
 }
 
-const onDeletePrice = id => deletePrice(id);
+// const onDeletePrice = id => deletePrice(id);
  
     return (
     

@@ -2,7 +2,6 @@
 // import { useDispatch } from 'react-redux';
 // import {setCredentials} from "../../../redux/auth/authSlice";
 import {useCurrentQuery} from "../../../redux/auth/authApi";
-import logout from "../../Icons/logout/logout"
 import s from "./ProfileInfo.module.scss";
 
 function ProfileInfo() {

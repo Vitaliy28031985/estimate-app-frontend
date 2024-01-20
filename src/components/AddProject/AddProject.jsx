@@ -10,7 +10,7 @@ function AddProject({isShowModal}) {
     const [description, setDescription] = useState('');
  
     const {data} = useGetProjectsQuery();
-    const [addProjects, { isLoading }] = useAddProjectsMutation();
+    const [addProjects] = useAddProjectsMutation();
 
     const handleChange = e => {
         const {name, value,} = e.currentTarget;
