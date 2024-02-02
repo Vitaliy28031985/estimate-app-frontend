@@ -1,0 +1,91 @@
+Arguments: 
+  /usr/bin/node /home/vitaliy/.yarn/bin/yarn.js add ttf2pdf
+
+PATH: 
+  /home/vitaliy/.yarn/bin:/home/vitaliy/.config/yarn/global/node_modules/.bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/vitaliy/.yarn/bin:/home/vitaliy/.config/yarn/global/node_modules/.bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.17.1
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/ttf2pdf: Not found
+      at params.callback [as _callback] (/home/vitaliy/.yarn/lib/cli.js:66145:18)
+      at self.callback (/home/vitaliy/.yarn/lib/cli.js:140890:22)
+      at Request.emit (node:events:514:28)
+      at Request.<anonymous> (/home/vitaliy/.yarn/lib/cli.js:141862:10)
+      at Request.emit (node:events:514:28)
+      at IncomingMessage.<anonymous> (/home/vitaliy/.yarn/lib/cli.js:141784:12)
+      at Object.onceWrapper (node:events:628:28)
+      at IncomingMessage.emit (node:events:526:35)
+      at endReadableNT (node:internal/streams/readable:1359:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+npm manifest: 
+  {
+    "homepage": "https://Vitaliy28031985.github.io/estimate-app-frontend/",
+    "name": "estimate-app-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "@reduxjs/toolkit": "^2.0.1",
+      "@testing-library/jest-dom": "^5.17.0",
+      "@testing-library/react": "^13.4.0",
+      "@testing-library/user-event": "^13.5.0",
+      "html2pdf.js": "^0.10.1",
+      "jspdf": "^2.5.1",
+      "jspdf-autotable": "^3.8.1",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-redux": "^9.0.4",
+      "react-router-dom": "^6.21.1",
+      "react-scripts": "5.0.1",
+      "react-spinners": "^0.13.8",
+      "react-toastify": "^9.1.3",
+      "redux": "^5.0.1",
+      "redux-logger": "^3.0.6",
+      "redux-persist": "^6.0.0",
+      "sass": "^1.69.6",
+      "scss": "^0.2.4",
+      "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject",
+      "lint:js": "eslint src/**/*.{js,jsx}"
+    },
+    "eslintConfig": {
+      "extends": [
+        "react-app",
+        "react-app/jest"
+      ]
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    },
+    "devDependencies": {
+      "gh-pages": "^6.1.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
