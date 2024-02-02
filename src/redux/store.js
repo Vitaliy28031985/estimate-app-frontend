@@ -17,7 +17,7 @@ import { authApi } from './auth/authApi';
 import { projectsApi } from './projectSlice/projectSlice';
 import {priceApi} from "./price/priceApi";
 import {estimateApi} from "./estimate/estimateApi" ;
-import {positionApi} from "./position/positionApi"
+import {positionApi} from "./position/positionApi";
 
 import authReducer from './auth/authSlice';
 

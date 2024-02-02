@@ -5,13 +5,21 @@ import {useGetPriceQuery} from "../../../redux/price/priceApi";
 import s from "./Select.module.scss"
 
 function Select({isShowModal, add}) {
+  const [filter, setFilter] = useState('')
   const {data} = useGetPriceQuery()
 
   const [title, setTitle] = useState('');
   const [unit, setUnit] = useState('');
   const [number, setNumber] = useState('');
- 
 
+
+const filterChange = e => setFilter(e.target.value);
+
+const normalizeFilter = filter.toLowerCase();
+
+const filteredContacts =  data?.filter(item =>
+  item.title.toLowerCase().includes(normalizeFilter)) ?? [];
+ 
   const handleChange = e => {
     const {name, value,} = e.currentTarget;
     switch (name) {
@@ -54,10 +62,11 @@ await add({title, unit, number: Number(number), price: priceCurrent})
  
 
     return(
-
+<>
+<input onChange={filterChange} value={filter} type="text" className={s.input} placeholder='Пошук з прайсу' />
 <form action="" onSubmit={handleSubmit}>
 <select className={s.input}  name="title" id="title" onChange={handleChange}>
-{data && data?.map(({title, price}) =>
+{filteredContacts && filteredContacts?.map(({title, price}) =>
 (
    <option value={title} >{title}</option>
   
@@ -74,7 +83,7 @@ await add({title, unit, number: Number(number), price: priceCurrent})
 </div>
 <button className={s.button}>Додати</button>
 </form>
-
+</>
     )
 }
 
