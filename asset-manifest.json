@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/estimate-app-frontend/static/css/main.9a65e783.css",
-    "main.js": "/estimate-app-frontend/static/js/main.b02a3c9a.js",
+    "main.js": "/estimate-app-frontend/static/js/main.6f5b8a27.js",
     "Home.js": "/estimate-app-frontend/static/js/Home.a50c1e79.chunk.js",
     "About.css": "/estimate-app-frontend/static/css/About.c12afa07.chunk.css",
     "About.js": "/estimate-app-frontend/static/js/About.605ba552.chunk.js",
@@ -12,12 +12,12 @@
     "Projects.css": "/estimate-app-frontend/static/css/Projects.cf7ec476.chunk.css",
     "Projects.js": "/estimate-app-frontend/static/js/Projects.c6281985.chunk.js",
     "Project.css": "/estimate-app-frontend/static/css/Project.5ef97295.chunk.css",
-    "Project.js": "/estimate-app-frontend/static/js/Project.2048aeac.chunk.js",
+    "Project.js": "/estimate-app-frontend/static/js/Project.7ba76e2f.chunk.js",
     "static/js/787.35fc0bbb.chunk.js": "/estimate-app-frontend/static/js/787.35fc0bbb.chunk.js",
     "static/js/650.194bda45.chunk.js": "/estimate-app-frontend/static/js/650.194bda45.chunk.js",
     "index.html": "/estimate-app-frontend/index.html",
     "main.9a65e783.css.map": "/estimate-app-frontend/static/css/main.9a65e783.css.map",
-    "main.b02a3c9a.js.map": "/estimate-app-frontend/static/js/main.b02a3c9a.js.map",
+    "main.6f5b8a27.js.map": "/estimate-app-frontend/static/js/main.6f5b8a27.js.map",
     "Home.a50c1e79.chunk.js.map": "/estimate-app-frontend/static/js/Home.a50c1e79.chunk.js.map",
     "About.c12afa07.chunk.css.map": "/estimate-app-frontend/static/css/About.c12afa07.chunk.css.map",
     "About.605ba552.chunk.js.map": "/estimate-app-frontend/static/js/About.605ba552.chunk.js.map",
@@ -28,12 +28,12 @@
     "Projects.cf7ec476.chunk.css.map": "/estimate-app-frontend/static/css/Projects.cf7ec476.chunk.css.map",
     "Projects.c6281985.chunk.js.map": "/estimate-app-frontend/static/js/Projects.c6281985.chunk.js.map",
     "Project.5ef97295.chunk.css.map": "/estimate-app-frontend/static/css/Project.5ef97295.chunk.css.map",
-    "Project.2048aeac.chunk.js.map": "/estimate-app-frontend/static/js/Project.2048aeac.chunk.js.map",
+    "Project.7ba76e2f.chunk.js.map": "/estimate-app-frontend/static/js/Project.7ba76e2f.chunk.js.map",
     "787.35fc0bbb.chunk.js.map": "/estimate-app-frontend/static/js/787.35fc0bbb.chunk.js.map",
     "650.194bda45.chunk.js.map": "/estimate-app-frontend/static/js/650.194bda45.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9a65e783.css",
-    "static/js/main.b02a3c9a.js"
+    "static/js/main.6f5b8a27.js"
   ]
 }
