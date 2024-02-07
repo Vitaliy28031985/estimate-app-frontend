@@ -97,9 +97,9 @@ const generatePdf = () => {
                 ({ title, unit, price, number, result  }, index) => [
                   index + 1,
                   title || '',        
-                  unit || '',        
-                  price || '',   
-                  number || '',       
+                  unit || '',          
+                  number || '',
+                  price || '',        
                   result || '',       
                 ]
               ) || []),
