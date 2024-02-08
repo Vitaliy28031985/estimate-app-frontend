@@ -6,10 +6,14 @@ import AddPrice from "../AddPrice/AddPrice";
 import UpdatePrice from "../UpdatePrice/UpdatePrice";
 import Delete from '../Icons/Delete/Delete';
 import s from "./PriceList.module.scss";
+import updates from "../../images/update-12-16.png";
 
 function PriceList() {
+const [filter, setFilter] = useState('')
 const [showModal, serShowModal] = useState(false);
 const [showUpdate, setShowUpdate] = useState(false);
+const [shoWButtons, setShoWButtons] = useState(false)
+
 const [newData, setNewData] = useState(null);
  const {data} = useGetPriceQuery();
  const [deletePrice] = useDeletePriceMutation();
@@ -26,6 +30,10 @@ const handleToggleUpdatePrice = () => {
     setShowUpdate(showUpdate => !showUpdate);
 }
 
+const handleToggleButtonsPrice = () => {
+    setShoWButtons(shoWButtons => !shoWButtons);
+}
+
 const updatePrice = async (id, title, price) => {
 
 nawId = await id;
@@ -35,10 +43,22 @@ nawPrice = await price;
 await setNewData({nawId, nawTitle, nawPrice});
 handleToggleUpdatePrice();
 }
+
+const filterChange = e => setFilter(e.target.value);
+
+const normalizeFilter = filter.toLowerCase();
+
+const filteredContacts =  data?.filter(item =>
+  item.title.toLowerCase().includes(normalizeFilter)) ?? [];
+
+  console.log(filteredContacts);
  
     return (
     
       <div>
+
+<input onChange={filterChange} value={filter} type="text" className={s.input} placeholder='Знайти' />
+
          <h1 className={s.title}>Прайс робіт</h1>
 
          <table className={s.iksweb}>
@@ -49,12 +69,22 @@ handleToggleUpdatePrice();
             </td>
 			<td className={s.twoRow}>Ціна за одиницю в грн.</td>
 		</tr>
-        {data && data?.map(({_id, title, price}) => (
+        {data && filteredContacts?.map(({_id, title, price}) => (
         <tr key={_id}>
-			<td className={s.rowOne} onClick={() => updatePrice(_id, title, price)}>
-               <button className={s.buttonDelete} onClick={() => deletePrice(_id)}>
+			<td className={s.rowOne} >
+                <button onClick={handleToggleButtonsPrice} className={s.buttonDelete} >
+                <Add  width={"24"} height={"24"} />
+                </button>
+                {shoWButtons && (
+                 <div className={s.buttonsContainer}>
+                    <button className={s.buttonDelete} onClick={() => updatePrice(_id, title, price)}>
+                    <img src={updates} width='20' height='20'/> 
+                    </button>
+                    <button className={s.buttonDelete} onClick={() => deletePrice(_id)}>
                 <Delete width={"24"} height={"24"}/>
-                </button> 
+                </button>
+                </div>   
+                )}
                 {title} 
                 </td>
 			<td className={s.twoRow}>{price}</td>
