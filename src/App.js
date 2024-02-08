@@ -1,4 +1,4 @@
-//import Home from "./Pages/Home/Home"
+
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from 'react';
 import { useState } from 'react';
@@ -49,4 +49,3 @@ function App() {
 }
 
 export default App;
-//estimate-app-frontend /estimate-app-frontend

@@ -33,7 +33,16 @@ export const priceApi = createApi({
         }),
         invalidatesTags: ['Price'],
       }),
-     
+      updatePrice: builder.mutation({
+        query: ({ id, newData }) => ({
+          url: `price/${id}`,
+          method: 'PUT',
+          body: newData,
+          
+        }),
+        invalidatesTags: ['Price'],
+      }),
+      
     }),
   });
 
@@ -41,6 +50,7 @@ export const priceApi = createApi({
     useGetPriceQuery,
     useAddPriceMutation,
     useDeletePriceMutation,
+    useUpdatePriceMutation
     
   } = priceApi;
 
