@@ -78,7 +78,7 @@ const filteredContacts =  data?.filter(item =>
                 {shoWButtons && (
                  <div className={s.buttonsContainer}>
                     <button className={s.buttonDelete} onClick={() => updatePrice(_id, title, price)}>
-                    <img src={updates} width='20' height='20'/> 
+                    <img src={updates} width='20' height='20' alt='update'/> 
                     </button>
                     <button className={s.buttonDelete} onClick={() => deletePrice(_id)}>
                 <Delete width={"24"} height={"24"}/>
