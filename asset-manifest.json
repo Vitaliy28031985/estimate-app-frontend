@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/estimate-app-frontend/static/css/main.9a65e783.css",
-    "main.js": "/estimate-app-frontend/static/js/main.6f5b8a27.js",
+    "main.js": "/estimate-app-frontend/static/js/main.428880ea.js",
     "Home.js": "/estimate-app-frontend/static/js/Home.a50c1e79.chunk.js",
     "About.css": "/estimate-app-frontend/static/css/About.c12afa07.chunk.css",
     "About.js": "/estimate-app-frontend/static/js/About.605ba552.chunk.js",
-    "Price.css": "/estimate-app-frontend/static/css/Price.6aaf63fe.chunk.css",
-    "Price.js": "/estimate-app-frontend/static/js/Price.182c5dfd.chunk.js",
+    "Price.css": "/estimate-app-frontend/static/css/Price.0b1b2201.chunk.css",
+    "Price.js": "/estimate-app-frontend/static/js/Price.c9e2c599.chunk.js",
     "Profile.css": "/estimate-app-frontend/static/css/Profile.76be3522.chunk.css",
     "Profile.js": "/estimate-app-frontend/static/js/Profile.d91383f0.chunk.js",
     "Projects.css": "/estimate-app-frontend/static/css/Projects.cf7ec476.chunk.css",
@@ -17,12 +17,12 @@
     "static/js/650.194bda45.chunk.js": "/estimate-app-frontend/static/js/650.194bda45.chunk.js",
     "index.html": "/estimate-app-frontend/index.html",
     "main.9a65e783.css.map": "/estimate-app-frontend/static/css/main.9a65e783.css.map",
-    "main.6f5b8a27.js.map": "/estimate-app-frontend/static/js/main.6f5b8a27.js.map",
+    "main.428880ea.js.map": "/estimate-app-frontend/static/js/main.428880ea.js.map",
     "Home.a50c1e79.chunk.js.map": "/estimate-app-frontend/static/js/Home.a50c1e79.chunk.js.map",
     "About.c12afa07.chunk.css.map": "/estimate-app-frontend/static/css/About.c12afa07.chunk.css.map",
     "About.605ba552.chunk.js.map": "/estimate-app-frontend/static/js/About.605ba552.chunk.js.map",
-    "Price.6aaf63fe.chunk.css.map": "/estimate-app-frontend/static/css/Price.6aaf63fe.chunk.css.map",
-    "Price.182c5dfd.chunk.js.map": "/estimate-app-frontend/static/js/Price.182c5dfd.chunk.js.map",
+    "Price.0b1b2201.chunk.css.map": "/estimate-app-frontend/static/css/Price.0b1b2201.chunk.css.map",
+    "Price.c9e2c599.chunk.js.map": "/estimate-app-frontend/static/js/Price.c9e2c599.chunk.js.map",
     "Profile.76be3522.chunk.css.map": "/estimate-app-frontend/static/css/Profile.76be3522.chunk.css.map",
     "Profile.d91383f0.chunk.js.map": "/estimate-app-frontend/static/js/Profile.d91383f0.chunk.js.map",
     "Projects.cf7ec476.chunk.css.map": "/estimate-app-frontend/static/css/Projects.cf7ec476.chunk.css.map",
@@ -34,6 +34,6 @@
   },
   "entrypoints": [
     "static/css/main.9a65e783.css",
-    "static/js/main.6f5b8a27.js"
+    "static/js/main.428880ea.js"
   ]
 }
