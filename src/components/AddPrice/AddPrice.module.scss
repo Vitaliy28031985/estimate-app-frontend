@@ -63,6 +63,10 @@ background: var(--Blue-Grey-Blue-Grey-050, #F0F4F8);
 }    
 }
 
+.buttonsContainer {
+   position: relative;
+}
+
 .button {
     width: 280px;
     padding-top: 5px;
@@ -93,4 +97,24 @@ background: var(--Blue-Grey-Blue-Grey-050, #F0F4F8);
         background: #FFF;
         color: #127FBF;
     }
+    }
+
+    .recordingButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 100;
+        border-color: transparent;
+        background: transparent;
+        box-sizing: 1px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        &:hover, &:focus {
+            border-color: #127FBF;
+            opacity: 0.7;
+        }
+    }
+
+    .recordingButton img {
+        border-radius: 10px;
     }
