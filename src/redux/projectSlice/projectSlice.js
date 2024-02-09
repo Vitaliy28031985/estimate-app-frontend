@@ -30,6 +30,14 @@ export const projectsApi = createApi({
         }),
         invalidatesTags: ['Project'],
       }),
+      updateProject: builder.mutation({
+        query: ({ id, newData }) => ({
+          url: `projects/${id}`,
+          method: 'PATCH',
+          body: newData,  
+        }),
+        invalidatesTags: ['Project'],
+      }),
       deleteProject: builder.mutation({
         query: id => ({
           url: `projects/${id}`,
@@ -46,6 +54,7 @@ export const projectsApi = createApi({
     useGetProjectByIdQuery,
     useAddProjectsMutation,
     useDeleteProjectMutation,
+    useUpdateProjectMutation
   } = projectsApi;
 
   
