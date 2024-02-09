@@ -51,7 +51,6 @@ const normalizeFilter = filter.toLowerCase();
 const filteredContacts =  data?.filter(item =>
   item.title.toLowerCase().includes(normalizeFilter)) ?? [];
 
-  console.log(filteredContacts);
  
     return (
     

@@ -20,17 +20,19 @@
 }
 
 .closeButton {
+    position: relative;
     background: transparent;
     border-color: transparent;
     margin-bottom: 30px;
+   
 }
 .closeButton svg {
-    fill: #829AB1;
-    transition: fill 250ms  cubic-bezier(0.4, 0, 0.2, 1); 
-     &:hover, &:focus {
-      fill: #334E68;    
-      } 
-  }
+  fill: #829AB1;
+  transition: fill 250ms  cubic-bezier(0.4, 0, 0.2, 1); 
+   &:hover, &:focus {
+    fill: #334E68;    
+    } 
+}
 
 .label {
     margin-left: 10px;
@@ -61,10 +63,6 @@ background: var(--Blue-Grey-Blue-Grey-050, #F0F4F8);
     width: 700px;
     height: 40px;
 }    
-}
-
-.buttonsContainer {
-   position: relative;
 }
 
 .button {
@@ -99,22 +97,4 @@ background: var(--Blue-Grey-Blue-Grey-050, #F0F4F8);
     }
     }
 
-    .recordingButton {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 100;
-        border-color: transparent;
-        background: transparent;
-        border-width: 1px;
-        border-radius: 15px;
-        margin-bottom: 30px;
-        &:hover, &:focus {
-            border-color: #127FBF;
-            opacity: 0.7;
-        }
-    }
-
-    .recordingButton img {
-        border-radius: 10px;
-    }
+   

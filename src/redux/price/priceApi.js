@@ -37,8 +37,7 @@ export const priceApi = createApi({
         query: ({ id, newData }) => ({
           url: `price/${id}`,
           method: 'PUT',
-          body: newData,
-          
+          body: newData,  
         }),
         invalidatesTags: ['Price'],
       }),
