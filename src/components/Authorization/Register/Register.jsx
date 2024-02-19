@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
-import {useSignupMutation} from "../../../redux/auth/authApi";
+import {useSignupMutation, useLoginMutation} from "../../../redux/auth/authApi";
 import {setCredentials} from "../../../redux/auth/authSlice";
+import {priceApi} from "../../../redux/price/priceApi";
+import {projectsApi} from "../../../redux/projectSlice/projectSlice";
 import s from "../Register.module.scss";
 
 
@@ -23,12 +25,12 @@ function Register({showRegister, forModal}) {
 
 const dispatch = useDispatch();
 const [singup] = useSignupMutation();
-// const [login, ] = useLoginMutation();
+const [login, ] = useLoginMutation();
 
-// const loginEl = {
-//     password,
-//     email
-//   };
+const loginEl = {
+    password,
+    email
+  };
 
     const handleChange = e => {
         const {name, value,} = e.currentTarget;
@@ -71,10 +73,11 @@ const [singup] = useSignupMutation();
 
     try {
         const user = await singup(registerEl).unwrap();
-        // const dataAnswers = await login(loginEl).unwrap();
+        const dataAnswers = await login(loginEl).unwrap();
         dispatch(setCredentials(user));
-        // dispatch(projectsApi.util.resetApiState());
-        // dispatch(priceApi.util.resetApiState());
+        dispatch(setCredentials(dataAnswers));
+        dispatch(projectsApi.util.resetApiState());
+        dispatch(priceApi.util.resetApiState());
         toast("Реєстрація пройшла успішно");
       } catch (error) {
         toast('Sorry, something went wrong', error);
