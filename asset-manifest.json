@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/estimate-app-frontend/static/css/main.9a65e783.css",
-    "main.js": "/estimate-app-frontend/static/js/main.b0dccc96.js",
+    "main.js": "/estimate-app-frontend/static/js/main.f40234a4.js",
     "Home.js": "/estimate-app-frontend/static/js/Home.a50c1e79.chunk.js",
     "About.css": "/estimate-app-frontend/static/css/About.c12afa07.chunk.css",
     "About.js": "/estimate-app-frontend/static/js/About.605ba552.chunk.js",
@@ -18,7 +18,7 @@
     "static/media/Recording.png": "/estimate-app-frontend/static/media/Recording.5f30dd9082f8eb815421.png",
     "index.html": "/estimate-app-frontend/index.html",
     "main.9a65e783.css.map": "/estimate-app-frontend/static/css/main.9a65e783.css.map",
-    "main.b0dccc96.js.map": "/estimate-app-frontend/static/js/main.b0dccc96.js.map",
+    "main.f40234a4.js.map": "/estimate-app-frontend/static/js/main.f40234a4.js.map",
     "Home.a50c1e79.chunk.js.map": "/estimate-app-frontend/static/js/Home.a50c1e79.chunk.js.map",
     "About.c12afa07.chunk.css.map": "/estimate-app-frontend/static/css/About.c12afa07.chunk.css.map",
     "About.605ba552.chunk.js.map": "/estimate-app-frontend/static/js/About.605ba552.chunk.js.map",
@@ -35,6 +35,6 @@
   },
   "entrypoints": [
     "static/css/main.9a65e783.css",
-    "static/js/main.b0dccc96.js"
+    "static/js/main.f40234a4.js"
   ]
 }
