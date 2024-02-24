@@ -15,12 +15,22 @@ import s from './ProjectItem.module.scss';
 import Modal from '../Modal/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import updates from "../../images/update-12-16.png";
+import UpdatePosition from "../UpdatePosition/UpdatePosition"
 
 function ProjectItem() {
   const [showPosition, setShowPosition] = useState(false);
   const [showEstimate, setShowEstimate] = useState(false);
+
+  const [showButtons, setShowButtons] = useState(false);
+  const [updatePositionModal, setUpdatePositionModal] = useState(false)
+
   
   const [currentId, setCurrentId] = useState({});
+
+  const [updateData, setUpdateData] = useState([]);
+  const [newPosition, setNewPosition] = useState({});
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data, error } = useGetProjectByIdQuery(id);
@@ -32,6 +42,11 @@ function ProjectItem() {
 
 let idOne = '';
 let idTwo = '';
+
+let projectId = '';
+let estimateId = '';
+let positionId = '';
+let newPosData = {};
 
   if (error) {
     return <div>Помилка завантаження проекту</div>;
@@ -50,6 +65,14 @@ let idTwo = '';
 
 const handleToggleEstimate = () => {
   setShowEstimate(showEstimate => !showEstimate);
+}
+
+const handleToggleButtons = () => {
+  setShowButtons(showButtons => !showButtons);
+}
+
+const handleToggleUpdatePosition = () => {
+  setUpdatePositionModal(updatePositionModal => !updatePositionModal);
 }
 
 const addFunction = async(position) => {
@@ -131,7 +154,17 @@ const generatePdf = () => {
  
 };
 
+const updatePosition = async (projId, estId, posId, currentData) => {
 
+ projectId = await projId;
+ estimateId = await estId;
+ positionId = await posId;
+ newPosData = await currentData;
+ 
+ await setUpdateData([projectId, estimateId, positionId]);
+ await setNewPosition(newPosData);
+ handleToggleUpdatePosition();
+}
 
   return (
     <div>
@@ -149,6 +182,7 @@ const generatePdf = () => {
             <div key={item._id}>
               <div className={s.buttonAddContainer}>
               <p className={s.titleTable}>{item.title}</p>
+              
                <button type='button' className={s.buttonAddTitle} onClick={() => onDeleteEstimate(data?._id, item?._id)}>
                 <Delete width={"24"} height={"24"}/>
                 </button>
@@ -173,9 +207,22 @@ const generatePdf = () => {
                 <tr key={_id} className={s.dataRow}>
                 <td className={s.oneRow}>{index + 1}</td>
                 <td>
-                  <button className={s.buttonDeletePosition} 
+                <button type='button' onClick={handleToggleButtons} className={s.buttonDeletePosition} >
+                 <Add width={"24"} height={"24"}/>
+                </button>
+                {showButtons && (
+                 <div className={s.buttonsContainer}>
+                  <button className={s.buttonDelete}
+                  onClick={() => updatePosition(item._id, data._id,  id, {title, unit, price, number})}
+                  >
+                    <img src={updates} width='20' height='20' alt='update'/> 
+                    </button>
+                    <button className={s.buttonDeletePosition} 
                   onClick={() => deletePositionFn(item._id, data._id,  id)}>
                     <Delete width={"24"} height={"24"}/></button>
+                 </div>
+                 )}
+                
                   {title}</td>                 
                 <td className={s.threeRow}>{unit}</td>
                 <td className={s.threeRow}>{number}</td>
@@ -205,7 +252,7 @@ const generatePdf = () => {
       )}
       
       {showEstimate && (<Modal><AddEstimate idData={id} isShowModal={handleToggleEstimate}/></Modal>)}
-     
+      {updatePositionModal && (<Modal><UpdatePosition idsData={updateData} isShowModal={handleToggleUpdatePosition} newPosition={newPosition}/></Modal>)}
       
       
     </div>

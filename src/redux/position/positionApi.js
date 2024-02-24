@@ -23,6 +23,16 @@ export const positionApi = createApi({
   
       invalidatesTags: ['Position'],
     }) ,
+    updatePosition: builder.mutation({
+     
+      query: ([prjId, estId, posId, newData ]) => ({
+        url: `position/${prjId}/${estId}/${posId}`,
+        method: 'PATCH',
+        body: newData, 
+      
+      }),
+      invalidatesTags: ['Position'],
+    }),
     deletePosition: builder.mutation({
       query: param => ({
         url: `position/${param.idPro}/${param.idEst}/${param.idPos}`,
@@ -37,6 +47,7 @@ export const positionApi = createApi({
 
 export const {
   useAddPositionMutation,
+  useUpdatePositionMutation,
   useDeletePositionMutation
 
 } = positionApi;
