@@ -33,7 +33,7 @@ return (
         {!changeAuthorization ? <AuthorizationForm showRegister={showRegister} forModal={forModal}/> :  <Register showRegister={showRegister} forModal={forModal}/>}
 
        {!changeAuthorization ?  
-       (<div className={s.registerContainer}><p>У вас ще немає акаунту?</p><button type='button' onClick={handleToggleAuthorization}>Зареєструватись</button></div>
+       (<div className={s.registerContainer}><p>У вас ще не має акаунту?</p><button type='button' onClick={handleToggleAuthorization}>Зареєструватись</button></div>
     ) :  
    (<div className={s.registerContainer}><p>У вас вже є акаунт?</p><button type='button' onClick={handleToggleAuthorization}>Авторизуватись</button></div>
     )

@@ -27,7 +27,7 @@ function AddPosition({isShowModal, add}) {
 {!toggleForm ? (<Select  isShowModal={isShowModal} add={add}/>) : (<Input isShowModal={isShowModal} add={add}/>)}
 
 {!toggleForm ?  
-       (<div className={s.positionContainer}><p>Ви хочите додати позицію якої немає в прайсі ?</p><button type='button' onClick={handleToggleModal}>Прейти щоб додати</button></div>
+       (<div className={s.positionContainer}><p>Ви хочите додати позицію якої не має в прайсі ?</p><button type='button' onClick={handleToggleModal}>Прейти щоб додати</button></div>
     ) :  
    (<div className={s.positionContainer}><p>У вас є ця позиція в прайсі?</p><button type='button' onClick={handleToggleModal}>Прейти щоб додати</button></div>
     )

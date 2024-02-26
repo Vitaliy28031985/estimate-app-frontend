@@ -77,7 +77,7 @@ return(
             value={description}
             />
         </div>
-        <button className={s.button}>Додати кошторис</button>
+        <button className={s.button}>Обновити кошторис</button>
        </form>
     </div>
 )

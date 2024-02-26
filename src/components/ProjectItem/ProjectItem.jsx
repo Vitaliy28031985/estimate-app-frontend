@@ -10,7 +10,8 @@ import {useAddPositionMutation, useDeletePositionMutation} from '../../redux/pos
 import Add from '../Icons/Add/Add';
 import Delete from '../Icons/Delete/Delete';
 import AddPosition from "../AddPosition/AddPosition";
-import AddEstimate from "../AddEstimate/AddEstimate"
+import AddEstimate from "../AddEstimate/AddEstimate";
+import UpdateEstimate from "../UpdateEstimate/UpdateEstimate";
 import s from './ProjectItem.module.scss';
 import Modal from '../Modal/Modal';
 import { ToastContainer, toast } from 'react-toastify';
@@ -25,11 +26,14 @@ function ProjectItem() {
   const [showButtons, setShowButtons] = useState(false);
   const [updatePositionModal, setUpdatePositionModal] = useState(false)
 
+  const [updateEstimateModal, setUpdateEstimateModal] = useState(false)
   
   const [currentId, setCurrentId] = useState({});
 
   const [updateData, setUpdateData] = useState([]);
   const [newPosition, setNewPosition] = useState({});
+
+  const [newUpdateEstimate, setNewUpdateEstimate] = useState({})
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -73,6 +77,10 @@ const handleToggleButtons = () => {
 
 const handleToggleUpdatePosition = () => {
   setUpdatePositionModal(updatePositionModal => !updatePositionModal);
+}
+
+const handleToggleUpdateEstimate = () => {
+  setUpdateEstimateModal(updateEstimateModal => !updateEstimateModal);
 }
 
 const addFunction = async(position) => {
@@ -154,6 +162,11 @@ const generatePdf = () => {
  
 };
 
+const updateEstimate = async (projId, estId, currentName) => {
+  await setNewUpdateEstimate({projId, estId, currentName})
+  handleToggleUpdateEstimate();
+}
+
 const updatePosition = async (projId, estId, posId, currentData) => {
 
  projectId = await projId;
@@ -186,6 +199,11 @@ const updatePosition = async (projId, estId, posId, currentData) => {
                <button type='button' className={s.buttonAddTitle} onClick={() => onDeleteEstimate(data?._id, item?._id)}>
                 <Delete width={"24"} height={"24"}/>
                 </button>
+                <button className={s.buttonDelete}
+                onClick={() => updateEstimate(data?._id, item?._id, item?.title)}
+                >
+                    <img src={updates} width='20' height='20' alt='update'/> 
+                    </button>
               </div>     
               
               <table className={s.iksweb}>
@@ -250,7 +268,11 @@ const updatePosition = async (projId, estId, posId, currentData) => {
       {showPosition && (
        <Modal><AddPosition isShowModal={handleTogglePosition} add={addFunction} /></Modal> 
       )}
-      
+
+       {updateEstimateModal && (
+       <Modal><UpdateEstimate isShowModal={handleToggleUpdateEstimate} idData={newUpdateEstimate} /></Modal> 
+      )}
+
       {showEstimate && (<Modal><AddEstimate idData={id} isShowModal={handleToggleEstimate}/></Modal>)}
       {updatePositionModal && (<Modal><UpdatePosition idsData={updateData} isShowModal={handleToggleUpdatePosition} newPosition={newPosition}/></Modal>)}
       
