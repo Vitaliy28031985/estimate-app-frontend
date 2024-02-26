@@ -6,6 +6,7 @@ import { unsetCredentials, selectIsLoggedIn } from '../../redux/auth/authSlice';
 import {priceApi} from "../../redux/price/priceApi";
 import {projectsApi} from "../../redux/projectSlice/projectSlice";
 import Burger from "../Icons/Burger/Burger";
+import Close from "../Icons/Close/Close"
 import ModalMenu from "./ModalMenu/ModalMenu";
 import s from "./Header.module.scss"
 
@@ -67,9 +68,16 @@ function Header({showRegister}) {
 
             {!widthDisplay && (
                 <div className={s.menuButtonContainer }>
-                <button className={s.menuButton} onClick={handleToggle}>
+                {showMenu ? (
+                 <button className={s.menuButton} onClick={handleToggle}>
                   <Burger width={"30"} height={"20"}/> 
-                </button>
+                </button>   
+                ) : (
+                    <button className={s.menuButton} onClick={handleToggle}>
+                  <Close width={"30"} height={"20"}/> 
+                </button> 
+                )}
+                
                 {showMenu && <ModalMenu/>}
                 
                 </div>

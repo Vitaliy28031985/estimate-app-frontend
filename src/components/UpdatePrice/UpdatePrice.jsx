@@ -73,7 +73,7 @@ return(
             value={price}
             />
         </div>
-        <button className={s.button}>Додати в прайс</button>
+        <button className={s.button}>Обновити</button>
        </form>
     </div>
 )

@@ -87,7 +87,7 @@ dispatch(projectsApi.util.resetApiState());
   <input className={s.input} type="number" value={price} name="price" onChange={handleChange} />
 </div>
 
-<button className={s.button}>Додати</button>
+<button className={s.button}>Обновити</button>
 </form>
 </div>
     )

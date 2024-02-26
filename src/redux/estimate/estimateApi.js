@@ -24,6 +24,16 @@ export const estimateApi = createApi({
   
       invalidatesTags: ['Estimate'],
     }) ,
+    updateEstimate: builder.mutation({
+     
+      query: ([prjId, estId, newData ]) => ({
+        url: `estimates/${prjId}/${estId}`,
+        method: 'PATCH',
+        body: newData, 
+      
+      }),
+      invalidatesTags: ['Estimate'],
+    }),
     deleteEstimate: builder.mutation({
         query: param => ({
           url: `estimates/${param.idPro}/${param.idEst}`,
@@ -37,6 +47,7 @@ export const estimateApi = createApi({
 
 export const {
   useAddEstimateMutation,
+  useUpdateEstimateMutation,
   useDeleteEstimateMutation
 } = estimateApi;
 
