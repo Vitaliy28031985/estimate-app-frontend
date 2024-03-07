@@ -24,6 +24,7 @@ function Header({showRegister}) {
      
     const handleToggle = () => {
         setShowMenu(showMenu => !showMenu);
+
     }
 
     const handleCloseNavMenu = async () => {
@@ -68,7 +69,7 @@ function Header({showRegister}) {
 
             {!widthDisplay && (
                 <div className={s.menuButtonContainer }>
-                {showMenu ? (
+                {!showMenu ? (
                  <button className={s.menuButton} onClick={handleToggle}>
                   <Burger width={"30"} height={"20"}/> 
                 </button>   
@@ -78,7 +79,7 @@ function Header({showRegister}) {
                 </button> 
                 )}
                 
-                {showMenu && <ModalMenu/>}
+                {showMenu && <ModalMenu handleToggle={handleToggle}/>}
                 
                 </div>
             )}
