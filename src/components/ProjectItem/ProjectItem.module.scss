@@ -41,6 +41,8 @@ table.iksweb{
 	border-spacing:0;
 	height: auto;
     color: #0b131a;
+    background: #fff;
+    box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
     @media screen and (min-width: 768px) {
         width: 100%;
         margin-left: 0;
@@ -94,6 +96,7 @@ table.iksweb th {
     color: black;
 }
 .oneRow {
+    position: relative;
     width: 30px;
     text-align: center;
     @media screen and (min-width: 768px) {
@@ -125,6 +128,7 @@ table.iksweb th {
 }
 
 .threeSix {
+    position: relative;
     width: 15px;
     text-align: center;
     @media screen and (min-width: 768px) {
@@ -193,6 +197,9 @@ table.iksweb th {
  }
 
 .buttonDeletePosition {
+    position: absolute;
+    top: 2px;
+    right: 2px;
     margin-right: 10px;
     padding: 0;
     border-color: transparent;
@@ -242,4 +249,55 @@ transition: background 250ms  cubic-bezier(0.4, 0, 0.2, 1);
     @media screen and (min-width: 768px) {
         margin-right: 20px;  
     } 
+}
+
+
+
+.input {
+    width: 100%;
+    border-width: 0;
+    text-align: center;
+    
+}
+.inputTitle {
+    width: 100%;
+    border-width: 0;
+    background-color: #fff;
+    }
+
+.buttonUpdate {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    padding: 2px;
+    background: transparent;
+    border-color: transparent;
+    border-radius: 50%;
+    color:#486581;
+
+    &:hover, &:focus {
+    color: #fff;
+      background: #347c99;   
+    }
+}
+
+.buttonUpdate svg{
+    fill: currentColor;
+
+} 
+
+.buttonUpdateEstimate {
+    background: transparent;
+    border-color: transparent;
+    color:#0b131a;;
+
+    &:hover, &:focus {
+    color:#347c99;
+         
+    }
+}
+
+.buttonUpdateEstimate svg{
+    fill: currentColor;
+
 }

@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { useGetProjectByIdQuery } from '../../redux/projectSlice/projectSlice';
 import {projectsApi} from "../../redux/projectSlice/projectSlice";
 import {useDeleteEstimateMutation} from '../../redux/estimate/estimateApi';
-import {useAddPositionMutation, useDeletePositionMutation} from '../../redux/position/positionApi';
+import {useAddPositionMutation, useDeletePositionMutation, useUpdatePositionMutation} from '../../redux/position/positionApi';
 import Add from '../Icons/Add/Add';
 import Delete from '../Icons/Delete/Delete';
 import AddPosition from "../AddPosition/AddPosition";
@@ -16,28 +16,37 @@ import s from './ProjectItem.module.scss';
 import Modal from '../Modal/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import updates from "../../images/update-12-16.png";
-import UpdatePosition from "../UpdatePosition/UpdatePosition"
+import Update from '../Icons/Update/UpdateIcon';
+import UpdateOk from '../Icons/Update/UpdateOk';
 
 function ProjectItem() {
+  const { id } = useParams();
+  const { data: project, error } = useGetProjectByIdQuery(id);
+  const[mutate] = useUpdatePositionMutation();
+  const [data, setData] = useState(project);
+
+
+
+  useEffect(() => {
+    setData(project); 
+}, [project]); 
+
+  
   const [showPosition, setShowPosition] = useState(false);
   const [showEstimate, setShowEstimate] = useState(false);
 
-  const [showButtons, setShowButtons] = useState(false);
-  const [updatePositionModal, setUpdatePositionModal] = useState(false)
-
+ 
   const [updateEstimateModal, setUpdateEstimateModal] = useState(false)
   
   const [currentId, setCurrentId] = useState({});
 
-  const [updateData, setUpdateData] = useState([]);
-  const [newPosition, setNewPosition] = useState({});
-
   const [newUpdateEstimate, setNewUpdateEstimate] = useState({})
 
-  const { id } = useParams();
+ 
+ 
   const dispatch = useDispatch();
-  const { data, error } = useGetProjectByIdQuery(id);
+  
+  
   const [deleteEstimate] = useDeleteEstimateMutation();
   const [deletePosition] = useDeletePositionMutation();
 
@@ -50,7 +59,7 @@ let idTwo = '';
 let projectId = '';
 let estimateId = '';
 let positionId = '';
-let newPosData = {};
+
 
   if (error) {
     return <div>Помилка завантаження проекту</div>;
@@ -69,14 +78,6 @@ let newPosData = {};
 
 const handleToggleEstimate = () => {
   setShowEstimate(showEstimate => !showEstimate);
-}
-
-const handleToggleButtons = () => {
-  setShowButtons(showButtons => !showButtons);
-}
-
-const handleToggleUpdatePosition = () => {
-  setUpdatePositionModal(updatePositionModal => !updatePositionModal);
 }
 
 const handleToggleUpdateEstimate = () => {
@@ -167,17 +168,61 @@ const updateEstimate = async (projId, estId, currentName) => {
   handleToggleUpdateEstimate();
 }
 
-const updatePosition = async (projId, estId, posId, currentData) => {
 
- projectId = await projId;
- estimateId = await estId;
- positionId = await posId;
- newPosData = await currentData;
- 
- await setUpdateData([projectId, estimateId, positionId]);
- await setNewPosition(newPosData);
- handleToggleUpdatePosition();
+
+const addIsToggle = (id, currentIsShow) => {
+  setData(prevData => {
+      const newData = { ...prevData }; 
+      const newEstimates = newData.estimates.map(estimate => {
+          const newPositions = estimate.positions.map(position => {
+              if (position._id === id) {
+                  return { ...position, isShow: currentIsShow }; 
+              }
+              return position;
+          });
+          return { ...estimate, positions: newPositions }; 
+      });
+      newData.estimates = newEstimates; 
+      return newData; 
+  });
+};
+
+const onChange = (e) => {
+  const { name, value, id } = e.currentTarget;
+  setData(prevData => {
+      const newData = { ...prevData }; 
+      const newEstimates = newData.estimates.map(estimate => {
+          const newPositions = estimate.positions.map(position => {
+              if (position._id === id) {
+                  switch (name) {
+                      case name:
+                          return  {...position, [name]: value};
+                      default:
+                        return position;
+                    }
+                  }
+              return position;
+          });
+          return { ...estimate, positions: newPositions }; 
+      });
+      newData.estimates = newEstimates; 
+      return newData; 
+  }); 
 }
+
+
+
+const handleSubmit = async (projId, estId, posId, updatePosition) => {
+  projectId = await projId;
+  estimateId = await estId;
+  positionId = await posId;
+ 
+  await mutate([projectId, estimateId, positionId, updatePosition])
+  dispatch(projectsApi.util.resetApiState());
+  
+}
+
+
 
   return (
     <div>
@@ -199,10 +244,9 @@ const updatePosition = async (projId, estId, posId, currentData) => {
                <button type='button' className={s.buttonAddTitle} onClick={() => onDeleteEstimate(data?._id, item?._id)}>
                 <Delete width={"24"} height={"24"}/>
                 </button>
-                <button className={s.buttonDelete}
-                onClick={() => updateEstimate(data?._id, item?._id, item?.title)}
-                >
-                    <img src={updates} width='20' height='20' alt='update'/> 
+                <button className={s.buttonUpdateEstimate}
+                onClick={() => updateEstimate(data?._id, item?._id, item?.title)}>
+                  <Update width='28' height='28'/>
                     </button>
               </div>     
               
@@ -221,31 +265,39 @@ const updatePosition = async (projId, estId, posId, currentData) => {
              </tr>
 
                   {item.positions &&
-                    item.positions.map(({ _id, id, title, unit, price, number, result }, index) => (
+                    item.positions.map(({ _id, id, title, unit, price, number, result, isShow = false }, index) => (
                 <tr key={_id} className={s.dataRow}>
-                <td className={s.oneRow}>{index + 1}</td>
-                <td>
-                <button type='button' onClick={handleToggleButtons} className={s.buttonDeletePosition} >
-                 <Add width={"24"} height={"24"}/>
-                </button>
-                {showButtons && (
-                 <div className={s.buttonsContainer}>
-                  <button className={s.buttonDelete}
-                  onClick={() => updatePosition(item._id, data._id,  id, {title, unit, price, number})}
+                <td className={s.oneRow}>
+                  {index + 1}
+                  <button  
+                  className={s.buttonUpdate}
+                  onClick={() => {
+                    isShow = !isShow;
+                    addIsToggle(_id, isShow);
+                    if(!isShow) {
+                       handleSubmit(data._id, item._id, id, {title, unit, number, price})
+                    }
+                    }}
                   >
-                    <img src={updates} width='20' height='20' alt='update'/> 
-                    </button>
-                    <button className={s.buttonDeletePosition} 
+                    {isShow ? (<UpdateOk width='22' height='22'/>) :
+                    (<Update width='22' height='22'/>)
+                    }
+                  
+                  </button>
+                  </td>
+                <td>
+                             
+                <input id={_id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange}/></td>                 
+                <td className={s.threeRow}><input id={_id} name='unit'  className={s.input} value={unit} disabled={!isShow} onChange={onChange}/></td>
+                <td className={s.threeRow}><input id={_id} name='number' className={s.input} value={number} disabled={!isShow} onChange={onChange}/></td>
+                <td className={s.threeRow}><input id={_id} name='price' className={s.input} value={price} disabled={!isShow} onChange={onChange}/></td>
+                <td className={s.threeSix}>
+                  {result}
+                  <button className={s.buttonDeletePosition} 
                   onClick={() => deletePositionFn(item._id, data._id,  id)}>
-                    <Delete width={"24"} height={"24"}/></button>
-                 </div>
-                 )}
-                
-                  {title}</td>                 
-                <td className={s.threeRow}>{unit}</td>
-                <td className={s.threeRow}>{number}</td>
-                <td className={s.threeRow}>{price}</td>
-                <td className={s.threeSix}>{result}</td>
+                    <Delete width={"24"} height={"24"}/>
+                  </button>             
+                  </td>
                       </tr>
                     ))}
 
@@ -274,7 +326,7 @@ const updatePosition = async (projId, estId, posId, currentData) => {
       )}
 
       {showEstimate && (<Modal><AddEstimate idData={id} isShowModal={handleToggleEstimate}/></Modal>)}
-      {updatePositionModal && (<Modal><UpdatePosition idsData={updateData} isShowModal={handleToggleUpdatePosition} newPosition={newPosition}/></Modal>)}
+      {/* {updatePositionModal && (<Modal><UpdatePosition idsData={updateData} isShowModal={handleToggleUpdatePosition} newPosition={newPosition}/></Modal>)} */}
       
       
     </div>
