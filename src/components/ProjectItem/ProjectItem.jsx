@@ -16,7 +16,6 @@ import s from './ProjectItem.module.scss';
 import Modal from '../Modal/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import updates from "../../images/update-12-16.png";
 import Update from '../Icons/Update/UpdateIcon';
 import UpdateOk from '../Icons/Update/UpdateOk';
 
@@ -24,7 +23,6 @@ function ProjectItem() {
   const { id } = useParams();
   const { data: project, error } = useGetProjectByIdQuery(id);
   const[mutate] = useUpdatePositionMutation();
-  const [newPositions, setNewPositions] = useState({})
   const [data, setData] = useState(project);
 
 
@@ -36,8 +34,6 @@ function ProjectItem() {
   
   const [showPosition, setShowPosition] = useState(false);
   const [showEstimate, setShowEstimate] = useState(false);
-
-  const [isType, setIsType] = useState(false);
 
  
   const [updateEstimateModal, setUpdateEstimateModal] = useState(false)
@@ -200,12 +196,9 @@ const onChange = (e) => {
               if (position._id === id) {
                   switch (name) {
                       case name:
-                          setNewPositions({...position, [name]: value})
-                          setIsType(true)
                           return  {...position, [name]: value};
-                        break;
                       default:
-                        return;
+                        return position;
                     }
                   }
               return position;
@@ -217,34 +210,18 @@ const onChange = (e) => {
   }); 
 }
 
-const handleSubmit = async (projId, estId, posId) => {
-  console.log(isType)
-if(setIsType) {
- await setIsType(false);
-projectId = await projId;
-estimateId = await estId;
-positionId = await posId;
-  const updatePosition = {
-      title: newPositions.title, 
-      unit: newPositions.unit, 
-      number: newPositions.number, 
-      price: newPositions.price
-  }
 
-if(updatePosition.title !== undefined || 
-  updatePosition.unit !== undefined ||
-  updatePosition.number !== undefined ||
-  updatePosition.price !== undefined
-  )  {
 
-  await mutate([projectId, estimateId, positionId, updatePosition]);
+const handleSubmit = async (projId, estId, posId, updatePosition) => {
+  projectId = await projId;
+  estimateId = await estId;
+  positionId = await posId;
  
+  await mutate([projectId, estimateId, positionId, updatePosition])
   dispatch(projectsApi.util.resetApiState());
   
-  console.log(isType)
-  }
-  }
 }
+
 
 
   return (
@@ -298,7 +275,7 @@ if(updatePosition.title !== undefined ||
                     isShow = !isShow;
                     addIsToggle(_id, isShow);
                     if(!isShow) {
-                       handleSubmit(data._id, item._id, id)
+                       handleSubmit(data._id, item._id, id, {title, unit, number, price})
                     }
                     }}
                   >
