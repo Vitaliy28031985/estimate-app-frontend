@@ -226,8 +226,9 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
   return (
     <div>
       <ul className={s.linksList}>
-        <li><NavLink to={`/materials/${data?._id}`}>Матеріали</NavLink></li>
-        <li><NavLink to={`/advances/${data?._id}`}>Аванс</NavLink></li>
+      <li className={s.buttonNavCurrent}>Кошторис</li>
+        <li className={s.buttonNav}><NavLink className={s.buttonNavLink} to={`/materials/${data?._id}`}>Матеріали</NavLink></li>
+        <li className={s.buttonNav}><NavLink className={s.buttonNavLink} to={`/advances/${data?._id}`}>Аванс</NavLink></li>
       </ul>
       <ToastContainer draggable={true} />
       <button className={s.createPdfFileButton} onClick={generatePdf}>Створити PDF файл</button>

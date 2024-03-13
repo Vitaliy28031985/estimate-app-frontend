@@ -23,16 +23,16 @@ export const materialApi = createApi({
   
       invalidatesTags: ['Material'],
     }) ,
-    // updatePosition: builder.mutation({
+    updateMaterial: builder.mutation({
      
-    //   query: ([prjId, estId, posId, newData ]) => ({
-    //     url: `position/${prjId}/${estId}/${posId}`,
-    //     method: 'PATCH',
-    //     body: newData, 
+      query: ([projId, matId, newData ]) => ({
+        url: `materials/${projId}/${matId}`,
+        method: 'PATCH',
+        body: newData, 
       
-    //   }),
-    //   invalidatesTags: ['Material'],
-    // }),
+      }),
+      invalidatesTags: ['Material'],
+    }),
      deleteMaterial: builder.mutation({
        query: param => ({
          url: `materials/${param.idPro}/${param.idMat}`,
@@ -47,7 +47,7 @@ export const materialApi = createApi({
 
 export const {
   useAddMaterialMutation,
-//   useUpdatePositionMutation,
+  useUpdateMaterialMutation,
   useDeleteMaterialMutation
 
 } = materialApi;

@@ -122,3 +122,51 @@ table.iksweb th {
           fill: #334E68;    
           } 
      }
+     .buttonUpdate {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        padding: 2px;
+        background: transparent;
+        border-color: transparent;
+        border-radius: 50%;
+        color:#486581;
+    
+        &:hover, &:focus {
+        color: #fff;
+          background: #347c99;   
+        }
+    }
+    
+    .buttonUpdate svg{
+        fill: currentColor;
+    
+    } 
+
+    .buttonNav {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        background-color: #0b131a;
+        border-radius: 5px; 
+           
+        &:hover, &:focus {
+        background-color: #347c99;
+        border-radius: 5px; 
+        }
+    
+        }
+    
+        .buttonNavLink {
+            color:#fff;
+        }
+    .buttonNavCurrent {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        background-color: #347c99;
+        border-radius: 5px;
+        color:#fff;
+    }
