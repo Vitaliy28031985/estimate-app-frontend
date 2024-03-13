@@ -301,3 +301,39 @@ transition: background 250ms  cubic-bezier(0.4, 0, 0.2, 1);
     fill: currentColor;
 
 }
+
+.linksList {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.buttonNav {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: #0b131a;
+    border-radius: 5px; 
+       
+    &:hover, &:focus {
+    background-color: #347c99;
+    border-radius: 5px; 
+    }
+
+    }
+
+    .buttonNavLink {
+        color:#fff;
+    }
+.buttonNavCurrent {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: #347c99;
+    border-radius: 5px;
+    color:#fff;
+}

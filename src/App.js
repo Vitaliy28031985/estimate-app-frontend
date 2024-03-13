@@ -7,6 +7,8 @@ import {PublicRouter} from './routers/PublicRoute';
 import Authorization from "./components/Authorization/Authorization";
 import Header from "./components/Header/Header";
 import Modal from "./components/Modal/Modal";
+import MaterialsPage from "./Pages/Materials/MaterialsPage";
+import Advances from "./Pages/Advances/AdvancesPage";
 import LoaderComponent from './components/LoaderComponent/LoaderComponent'
 import s from "./App.module.scss";
 
@@ -40,6 +42,8 @@ function App() {
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         <Route path="/projects" element={<PrivateRoute><Projects/></PrivateRoute>} />
         <Route path="/projects/:id" element={<PrivateRoute><Project/></PrivateRoute>}/>
+        <Route path="/materials/:id" element={<PrivateRoute><MaterialsPage/></PrivateRoute>}/>
+        <Route path="/advances/:id" element={<PrivateRoute><Advances/></PrivateRoute>}/>
         <Route path="*" element={<p>page not found</p>} />
       </Routes>
       </Suspense>

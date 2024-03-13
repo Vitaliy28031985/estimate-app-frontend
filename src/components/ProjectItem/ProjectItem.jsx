@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import pdfMake from "pdfmake/build/pdfmake";
@@ -223,9 +223,13 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
 }
 
 
-
   return (
     <div>
+      <ul className={s.linksList}>
+      <li className={s.buttonNavCurrent}>Кошторис</li>
+        <li className={s.buttonNav}><NavLink className={s.buttonNavLink} to={`/materials/${data?._id}`}>Матеріали</NavLink></li>
+        <li className={s.buttonNav}><NavLink className={s.buttonNavLink} to={`/advances/${data?._id}`}>Аванс</NavLink></li>
+      </ul>
       <ToastContainer draggable={true} />
       <button className={s.createPdfFileButton} onClick={generatePdf}>Створити PDF файл</button>
       {data && (
@@ -316,7 +320,28 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
         <p>Загальна сума: </p>
         {data && <p>{data.total}</p>}
       </div>
+
+      {data?.materialsTotal && (
+        <div className={s.total}>
+          <p>Витрачено на матеріали:</p>
+        <p>{data?.materialsTotal}</p>
+      </div> 
+      )}
+      {data?.advancesTotal && (
+         <div className={s.total}>
+          <p>Аванс:</p>
+        <p>{data?.advancesTotal}</p>
+      </div>
+      )}
+      {data?.general && (
+       <div div className={s.total}>
+        <p>До оплати:</p>
+        <p>{data?.general}</p>
+      </div> 
+      )}
       
+     
+     
       {showPosition && (
        <Modal><AddPosition isShowModal={handleTogglePosition} add={addFunction} /></Modal> 
       )}

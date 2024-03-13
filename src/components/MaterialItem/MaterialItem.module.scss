@@ -1,0 +1,172 @@
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table.iksweb{
+	max-width: 320px;
+    margin-left: 40px;
+	border-collapse:collapse;
+	border-spacing:0;
+	height: auto;
+    color: #0b131a;
+    background: #fff;
+    box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+    @media screen and (min-width: 768px) {
+        width: 100%;
+        margin-left: 0;
+    } 
+}
+table.iksweb,table.iksweb td, table.iksweb th {
+    position: relative;
+	border: 1px solid #486581;
+}
+table.iksweb td,table.iksweb th {
+	padding: 8px;
+	height: 35px;
+}
+table.iksweb th {
+	background: #347c99; 
+	color: #fff; 
+	font-weight: normal;
+}
+
+.oneRow {
+    position: relative;
+    width: 30px;
+    text-align: center;
+    @media screen and (min-width: 768px) {
+        width: 40px; 
+    } 
+    @media screen and (min-width: 1200px) {
+        min-width: 60px; 
+    }
+}
+
+.threeRow {
+    width: 15px;
+    text-align: center;
+    @media screen and (min-width: 768px) {
+        width: 70px; 
+    } 
+    @media screen and (min-width: 1200px) {
+        min-width: 120px; 
+    }
+}
+
+.titleRow {
+    font-size: 12px;
+    font-weight: 800;
+    @media screen and (min-width: 768px) {
+        font-size: 20px;; 
+    } 
+}
+
+.threeSix {
+    position: relative;
+    width: 15px;
+    text-align: center;
+    @media screen and (min-width: 768px) {
+        width: 90px; 
+    }
+    @media screen and (min-width: 1200px) {
+        min-width: 120px; 
+    } 
+}
+
+.input {
+    width: 100%;
+    border-width: 0;
+    text-align: center;
+    
+}
+
+.inputTitle {
+    width: 100%;
+    border-width: 0;
+    background-color: #fff;
+    }
+
+    .linksList {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .buttonsContainer {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .buttonsContainer button {
+        border-color: transparent;
+        background: transparent;
+    }
+
+    .buttonsContainer svg {
+        fill: #0b131a;
+    }
+
+    .buttonAddTitle {
+        border-color: transparent;
+        background: transparent;
+    }
+
+    .buttonAddTitle svg {
+        fill: black;
+        transition: fill 250ms  cubic-bezier(0.4, 0, 0.2, 1); 
+         &:hover, &:focus {
+          fill: #334E68;    
+          } 
+     }
+     .buttonUpdate {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        padding: 2px;
+        background: transparent;
+        border-color: transparent;
+        border-radius: 50%;
+        color:#486581;
+    
+        &:hover, &:focus {
+        color: #fff;
+          background: #347c99;   
+        }
+    }
+    
+    .buttonUpdate svg{
+        fill: currentColor;
+    
+    } 
+
+    .buttonNav {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        background-color: #0b131a;
+        border-radius: 5px; 
+           
+        &:hover, &:focus {
+        background-color: #347c99;
+        border-radius: 5px; 
+        }
+    
+        }
+    
+        .buttonNavLink {
+            color:#fff;
+        }
+    .buttonNavCurrent {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        background-color: #347c99;
+        border-radius: 5px;
+        color:#fff;
+    }
