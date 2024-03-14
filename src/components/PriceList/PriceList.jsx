@@ -1,48 +1,31 @@
-import { useState } from 'react';
-import {useGetPriceQuery, useDeletePriceMutation} from "../../redux/price/priceApi";
+import { useState, useEffect } from 'react';
+import {useGetPriceQuery, useUpdatePriceMutation, useDeletePriceMutation} from "../../redux/price/priceApi";
 import Add from "../Icons/Add/Add";
 import Modal from "../Modal/Modal";
 import AddPrice from "../AddPrice/AddPrice";
-import UpdatePrice from "../UpdatePrice/UpdatePrice";
 import Delete from '../Icons/Delete/Delete';
 import s from "./PriceList.module.scss";
-import updates from "../../images/update-12-16.png";
+import Update from '../Icons/Update/UpdateIcon';
+import UpdateOk from '../Icons/Update/UpdateOk';
 
 function PriceList() {
 const [filter, setFilter] = useState('')
 const [showModal, serShowModal] = useState(false);
-const [showUpdate, setShowUpdate] = useState(false);
-const [shoWButtons, setShoWButtons] = useState(false)
 
-const [newData, setNewData] = useState(null);
- const {data} = useGetPriceQuery();
+ const {data: price} = useGetPriceQuery();
+ const [data, setData] = useState(price);
  const [deletePrice] = useDeletePriceMutation();
+ const[mutate] = useUpdatePriceMutation()
 
-let nawId = '';
-let nawTitle = '';
-let nawPrice = '';
+ useEffect(() => {
+    setData(price); 
+}, [price]); 
+
 
  const handleToggleAddPrice = () => {
     serShowModal(showModal => !showModal);
 }
 
-const handleToggleUpdatePrice = () => {
-    setShowUpdate(showUpdate => !showUpdate);
-}
-
-const handleToggleButtonsPrice = () => {
-    setShoWButtons(shoWButtons => !shoWButtons);
-}
-
-const updatePrice = async (id, title, price) => {
-
-nawId = await id;
-nawTitle = await title;
-nawPrice = await price;
-
-await setNewData({nawId, nawTitle, nawPrice});
-handleToggleUpdatePrice();
-}
 
 const filterChange = e => setFilter(e.target.value);
 
@@ -50,6 +33,38 @@ const normalizeFilter = filter.toLowerCase();
 
 const filteredContacts =  data?.filter(item =>
   item.title.toLowerCase().includes(normalizeFilter)) ?? [];
+
+  const addIsToggle = (id, currentIsShow) => {
+    setData(prevData => {
+        const newData = prevData.map(price => {
+            if (price._id === id) {
+                return { ...price, isShow: currentIsShow };
+            }
+            return price; 
+        });
+    
+        return newData; 
+    });
+};
+
+const onChange = (e) => {
+    const { name, value, id } = e.currentTarget;
+    setData(prevData => {
+        const newData = prevData.map(price => {
+            if (price._id === id) {
+                switch (name) {
+                    case name:
+                        return  {...price, [name]: value};
+                    default:
+                      return price;
+                  }
+            }
+            return price; 
+        });
+    
+        return newData; 
+    });
+}
 
  
     return (
@@ -68,32 +83,37 @@ const filteredContacts =  data?.filter(item =>
             </td>
 			<td className={s.twoRow}>Ціна за одиницю в грн.</td>
 		</tr>
-        {data && filteredContacts?.map(({_id, title, price}) => (
+        {data && filteredContacts?.map(({_id, title, price, isShow = false}) => (
         <tr key={_id}>
 			<td className={s.rowOne} >
-                <button onClick={handleToggleButtonsPrice} className={s.buttonDelete} >
-                <Add  width={"24"} height={"24"} />
-                </button>
-                {shoWButtons && (
-                 <div className={s.buttonsContainer}>
-                    <button className={s.buttonDelete} onClick={() => updatePrice(_id, title, price)}>
-                    <img src={updates} width='20' height='20' alt='update'/> 
-                    </button>
-                    <button className={s.buttonDelete} onClick={() => deletePrice(_id)}>
+                   <button  
+                  className={s.buttonUpdate}
+                  onClick={() => {
+                    isShow = !isShow;
+                    addIsToggle(_id, isShow);
+                    if(!isShow) {
+                       mutate({id: _id, newData: {title, price}});
+                    }
+                    }}
+                  >
+                    {isShow ? (<UpdateOk width='22' height='22'/>) :
+                    (<Update width='22' height='22'/>)
+                    }
+                  
+                  </button>
+                <input id={_id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange} />
+                </td>
+			<td className={s.twoRow}> <input id={_id} name='price' className={s.inputPrice} value={price} disabled={!isShow} onChange={onChange} />
+            <button className={s.buttonDelete} onClick={() => deletePrice(_id)}>
                 <Delete width={"24"} height={"24"}/>
                 </button>
-                </div>   
-                )}
-                {title} 
-                </td>
-			<td className={s.twoRow}>{price}</td>
+            </td>
 		</tr>    
         ))}
 		
 	</tbody>
 </table>
 {showModal && (<Modal><AddPrice isShowModal={handleToggleAddPrice}/></Modal>)}
-{showUpdate && (<Modal><UpdatePrice isShowModal={handleToggleUpdatePrice} getDataPrice={newData}/></Modal>)}
 
      </div>
     );

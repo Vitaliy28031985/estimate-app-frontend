@@ -26,10 +26,13 @@
  }
 
 .buttonDelete {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    margin-right: 10px;
     padding: 0;
-    background: transparent;
     border-color: transparent;
-    margin-right: 5px;
+    background: transparent;
     @media screen and (min-width: 768px) {
         margin-right: 20px;  
     } 
@@ -86,6 +89,7 @@ table.iksweb th {
 }
 
 .twoRow {
+    position: relative;
     text-align: center;
 }
 
@@ -118,3 +122,37 @@ background: var(--Blue-Grey-Blue-Grey-050, #F0F4F8);
     height: 40px;
 }    
 }
+
+.inputTitle {
+    width: 90%;
+    margin-left: 30px;
+    border-width: 0;
+    background-color: #fff;
+    }
+    .inputPrice {
+        width: 90%;
+        border-width: 0;
+        text-align: center;
+        
+    }
+
+    .buttonUpdate {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        padding: 2px;
+        background: transparent;
+        border-color: transparent;
+        border-radius: 50%;
+        color:#486581;
+    
+        &:hover, &:focus {
+        color: #fff;
+          background: #347c99;   
+        }
+    }
+    
+    .buttonUpdate svg{
+        fill: currentColor;
+    
+    } 

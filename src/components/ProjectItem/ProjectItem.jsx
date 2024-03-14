@@ -25,8 +25,6 @@ function ProjectItem() {
   const[mutate] = useUpdatePositionMutation();
   const [data, setData] = useState(project);
 
-
-
   useEffect(() => {
     setData(project); 
 }, [project]); 
@@ -146,6 +144,9 @@ const generatePdf = () => {
       );
     });
     content.push({ text: `Загальна сума:                            ${data?.total}`, fontSize: 30, marginTop: 30},)
+    content.push({ text: `Витрачено на матеріали:          ${data?.materialsTotal}`, fontSize: 30, marginTop: 30},)
+    content.push({ text: `Аванс:                                             ${data?.advancesTotal}`, fontSize: 30, marginTop: 30},)
+    content.push({ text: `До оплати:                                    ${data?.general}`, fontSize: 30, marginTop: 30},)
     const styles = {
       tableExample: {
         margin: [0, 5, 0, 15],
@@ -211,15 +212,13 @@ const onChange = (e) => {
 }
 
 
-
 const handleSubmit = async (projId, estId, posId, updatePosition) => {
   projectId = await projId;
   estimateId = await estId;
   positionId = await posId;
  
   await mutate([projectId, estimateId, positionId, updatePosition])
-  dispatch(projectsApi.util.resetApiState());
-  
+  dispatch(projectsApi.util.resetApiState()); 
 }
 
 
@@ -321,24 +320,27 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
         {data && <p>{data.total}</p>}
       </div>
 
-      {data?.materialsTotal && (
+      
         <div className={s.total}>
           <p>Витрачено на матеріали:</p>
-        <p>{data?.materialsTotal}</p>
+          {data?.materialsTotal && (
+        <p>{data?.materialsTotal}</p> )}
       </div> 
-      )}
-      {data?.advancesTotal && (
+     
+      
          <div className={s.total}>
           <p>Аванс:</p>
-        <p>{data?.advancesTotal}</p>
+          {data?.advancesTotal && (
+        <p>{data?.advancesTotal}</p>)}
       </div>
-      )}
-      {data?.general && (
+      
+      
        <div div className={s.total}>
         <p>До оплати:</p>
-        <p>{data?.general}</p>
+        {data?.general && (
+        <p>{data?.general}</p>)}
       </div> 
-      )}
+      
       
      
      
@@ -351,7 +353,7 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
       )}
 
       {showEstimate && (<Modal><AddEstimate idData={id} isShowModal={handleToggleEstimate}/></Modal>)}
-      {/* {updatePositionModal && (<Modal><UpdatePosition idsData={updateData} isShowModal={handleToggleUpdatePosition} newPosition={newPosition}/></Modal>)} */}
+      
       
       
     </div>
