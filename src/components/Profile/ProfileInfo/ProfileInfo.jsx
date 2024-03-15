@@ -1,18 +1,12 @@
-// import { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import {setCredentials} from "../../../redux/auth/authSlice";
+
 import {useCurrentQuery} from "../../../redux/auth/authApi";
+
 import s from "./ProfileInfo.module.scss";
 
 function ProfileInfo() {
     const {data} = useCurrentQuery();
-    // const dispatch = useDispatch();
+
     
-    // useEffect(() => {
-    //     if (data) {
-    //       dispatch(setCredentials(data));
-    //     }
-    //   }, [data, dispatch]);
 
 return(
     <div>

@@ -1,7 +1,11 @@
+import { useDispatch } from 'react-redux';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfileProjects from "./ProfileProjects/ProfileProjects";
+import {authApi} from "../../redux/auth/authApi";
 import s from "./Profile.module.scss";
-function ProfilePage() { 
+function ProfilePage() {
+    const dispatch = useDispatch();
+    dispatch(authApi.util.resetApiState()); 
 
     return (
         <div>
