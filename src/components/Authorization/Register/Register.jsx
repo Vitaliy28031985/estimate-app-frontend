@@ -13,12 +13,14 @@ function Register({showRegister, forModal}) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [role, setRole] = useState('');
     const [password, setPassword] = useState('');
     const [passwordTwo, setPasswordTwo] = useState('')
 
     const registerEl = {
         name,
         email,
+        role,
         password,
         phone, 
       }
@@ -33,7 +35,7 @@ const loginEl = {
   };
 
     const handleChange = e => {
-        const {name, value,} = e.currentTarget;
+        const {name, value} = e.currentTarget;
         switch (name) {
            case 'name':
            setName(value);
@@ -43,6 +45,9 @@ const loginEl = {
             break;
             case 'phone':
             setPhone(value);
+            break;
+            case 'roleUser':
+            setRole(value);
             break;
             case 'password':
             setPassword(value);
@@ -55,10 +60,10 @@ const loginEl = {
            return;  
         }
      }
-
+     console.log(role);
      const handleSubmit = async e => {
         e.preventDefault();
-        if(name === '' || email === '' || phone === '' || password === '' || passwordTwo === '' ) {
+        if(name === '' || email === '' || phone === '' || role === '' || password === '' || passwordTwo === '' ) {
             toast("Заповніть усі поля");
             return
         }
@@ -70,6 +75,8 @@ const loginEl = {
             toast("введіть пароль з 6 і більше символів")
             return
         }
+
+      
 
     try {
         const user = await singup(registerEl).unwrap();
@@ -85,6 +92,7 @@ const loginEl = {
     setEmail('')
     setName('')
     setPhone('');
+    setRole('');
     setPassword('')
     setPasswordTwo('')
    
@@ -125,6 +133,19 @@ return (
             onChange={handleChange}
             value={phone}
             />
+            </div>
+            <div className={s.radioContainer}>
+              <p className={s.label}>Роль</p>
+              <div >
+            <label>
+              <input type="radio" name="roleUser" checked={role === "customer"} onChange={handleChange} value="customer" />
+             Замовник
+             </label>
+             <label>
+             <input type="radio" name="roleUser" checked={role === "executor"}  onChange={handleChange} value="executor" />
+              Виконавець
+              </label>
+            </div>
             </div>
             <div>
             <p className={s.label}>Пароль</p>

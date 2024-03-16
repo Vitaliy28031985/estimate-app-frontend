@@ -133,3 +133,15 @@ color: #127FBF;
     font-size: 30px;
 }
 }
+
+.radioContainer {
+    display: flex;
+    align-items: center;
+    // gap: 20px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+.radioContainer input {
+    margin-left: 20px;
+   margin-right: 10px;
+}
