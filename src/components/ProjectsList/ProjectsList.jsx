@@ -28,12 +28,11 @@ let nawDescription = '';
 
 const { data: userData } = useCurrentQuery(); 
 
-console.log(userData)
 
 useEffect(() => {
   if (userData) {
     const role = userData?.user?.role;
-    const isUserRole = role !== "customer" || role === undefined;
+    const isUserRole = role !== "customer";
        setUserRole(isUserRole);
   }
 }, [userData, userRole]);
