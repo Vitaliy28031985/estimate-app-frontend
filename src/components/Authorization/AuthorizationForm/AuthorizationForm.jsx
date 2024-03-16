@@ -72,7 +72,7 @@ return (
     
         <div>
             <ToastContainer draggable={true} />
-        <h1 className={s.title}>Авторизація</h1>
+        <h1 className={s.title}>Увійти</h1>
         <form action=""
         onSubmit={handleSubmit}
         >
@@ -93,7 +93,7 @@ return (
             />
             </div>
             
-            <button className={s.button}>Авторизуватись</button>
+            <button className={s.button}>Увійти</button>
         </form>
         </div>
     

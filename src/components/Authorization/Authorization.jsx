@@ -35,7 +35,7 @@ return (
        {!changeAuthorization ?  
        (<div className={s.registerContainer}><p>У вас ще не має акаунту?</p><button type='button' onClick={handleToggleAuthorization}>Зареєструватись</button></div>
     ) :  
-   (<div className={s.registerContainer}><p>У вас вже є акаунт?</p><button type='button' onClick={handleToggleAuthorization}>Авторизуватись</button></div>
+   (<div className={s.registerContainer}><p>У вас вже є акаунт?</p><button type='button' onClick={handleToggleAuthorization}>Увійти</button></div>
     )
     }
         </div>

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink} from 'react-router-dom';
 import { useGetProjectsQuery, useDeleteProjectMutation } from '../../redux/projectSlice/projectSlice';
+import {useCurrentQuery} from "../../redux/auth/authApi";
 import Add from '../Icons/Add/Add';
 import AddProject from "../AddProject/AddProject";
 import UpdateProject from "../UpdateProject/UpdateProject";
@@ -12,16 +13,31 @@ import updates from "../../images/update-12-16.png";
 
 
 function ProjectsList() {
+  
 
 const [showProject, setShowProject] = useState(false)
 const [showUpdateModal, setShowUpdateModal] = useState(false); 
 const [newData, setNewData] = useState(null);
 const {data} = useGetProjectsQuery();
 const [deleteProject] = useDeleteProjectMutation();
+const [userRole, setUserRole] = useState(false);
 
 let nawId = '';
 let nawTitle = '';
 let nawDescription = '';
+
+const { data: userData } = useCurrentQuery(); 
+
+
+useEffect(() => {
+  if (userData) {
+    const role = userData?.user?.role;
+    const isUserRole = role !== "customer";
+       setUserRole(isUserRole);
+  }
+}, [userData, userRole]);
+
+
 
 const handleToggleProject = () => {
   setShowProject(showProject => !showProject);
@@ -47,28 +63,35 @@ const updateProject = async (id, title, description) => {
 
 } 
 
-
-
     return (
       <div >
         <ToastContainer draggable={true} />
         <div className={s.titleContainer}>
      <h1>Кошториси об'єктів</h1>
-        <button onClick={handleToggleProject} className={s.addButton}><Add width={"24"} height={"24"}/></button>
+     {userRole && (
+      <button onClick={handleToggleProject} className={s.addButton}><Add width={"24"} height={"24"}/></button>
+     )}
+        
      
      </div>
    <ul className={s.projectContainer}>
     {data && data.map(({_id, title, description, total}) => (
          <li className={s.projectItem} key={_id} id={_id}>
-          <button className={s.buttonDelete} onClick={() => updateProject(_id, title, description)}>
+          {userRole && (
+            <button className={s.buttonDelete} onClick={() => updateProject(_id, title, description)}>
           <img src={updates} width='20' height='20' alt='update'/> 
-          </button>
+          </button> 
+          )}
+         
         <h2 className={s.projectTitle}>{title}</h2>
         <p className={s.projectDescription}>{description}</p>
         <p className={s.projectPrice}>Загальна сума кошторису: {total} грн.</p>
         <div className={s.buttonContainer}>
         <NavLink className={s.projectLink} to={`/projects/${_id}`}>Детальніше</NavLink>
-        <button className={s.projectLink} onClick={() => onDeleteProject(_id)}>Видалити</button>
+        {userRole && (
+         <button className={s.projectLink} onClick={() => onDeleteProject(_id)}>Видалити</button> 
+        )}
+        
         </div>
     </li> 
     ))}

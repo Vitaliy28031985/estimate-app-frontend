@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useGetProjectByIdQuery } from '../../redux/projectSlice/projectSlice';
 import {useDeleteMaterialMutation, useUpdateMaterialMutation} from "../../redux/material/materialApi";
+import {useCurrentQuery} from "../../redux/auth/authApi";
 import {projectsApi} from "../../redux/projectSlice/projectSlice";
 import AddEstimate from "../AddMaterial/AddMaterial";
 import Modal from '../Modal/Modal';
@@ -15,9 +16,11 @@ import s from "./MaterialItem.module.scss";
 function MaterialItem() {
     const { id } = useParams();
     const { data: project} = useGetProjectByIdQuery(id);
+    const { data: userData } = useCurrentQuery(); 
     const [deleteMaterial] = useDeleteMaterialMutation();
     const [mutate] = useUpdateMaterialMutation();
     const [data, setData] = useState(project);
+    const [userRole, setUserRole] = useState(false);
     
     const dispatch = useDispatch();
 
@@ -29,8 +32,13 @@ function MaterialItem() {
       }
 
   useEffect(() => {
-    setData(project); 
-}, [project]); 
+    setData(project);
+    if (userData) {
+      const role = userData?.user?.role;
+      const isUserRole = role !== "customer";
+         setUserRole(isUserRole);
+    }  
+}, [project, userData, userRole]); 
 
 const addIsToggle = (id, currentIsShow) => {
   setData(prevData => {
@@ -80,8 +88,10 @@ const onChange = (e) => {
       </ul>
 <div className={s.buttonsContainer}>
       <h1 className={s.title}>Матеріали</h1>
-
-      <button onClick={handleToggleAdd}><Add width={'24'} height={'24'}/></button>
+      {userRole && (
+        <button onClick={handleToggleAdd}><Add width={'24'} height={'24'}/></button>
+      )}
+      
 </div>
       <table className={s.iksweb}>
                 <tbody>
@@ -98,7 +108,8 @@ const onChange = (e) => {
                 <tr key={id} className={s.dataRow}>
                 <td className={s.oneRow}>
                   {index + 1}
-                  <button  
+                  {userRole && (
+                     <button  
                   className={s.buttonUpdate}
                   onClick={() => {
                     isShow = !isShow;
@@ -113,12 +124,15 @@ const onChange = (e) => {
                     }
                   
                   </button>
+                  )}
+                 
                     </td>
                 <td><input id={id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange} /></td>                 
                 <td className={s.threeRow}><input id={id} name='order'  className={s.input} value={order} disabled={!isShow} onChange={onChange} /></td>
                 <td className={s.threeRow}><input id={id} name='date' className={s.input} value={date} disabled={!isShow} onChange={onChange} /></td>
                 <td className={s.threeRow}><input id={id} name='sum' className={s.input} value={sum} disabled={!isShow} onChange={onChange} />
-                <button type='button' className={s.buttonAddTitle}  onClick={ async () => 
+                {userRole && (
+                   <button type='button' className={s.buttonAddTitle}  onClick={ async () => 
                   {
                     
                    await deleteMaterial({idPro: data?._id, idMat: id});
@@ -128,6 +142,8 @@ const onChange = (e) => {
                     >
                 <Delete width={"24"} height={"24"}/>
                 </button>
+                )}
+               
                 
                 </td>
                       </tr>

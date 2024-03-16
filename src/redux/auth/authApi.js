@@ -31,6 +31,24 @@ export const authApi = createApi({
         body,
       }),
     }),
+    addAllow: builder.mutation({
+      query: ({id, newData }) => ({
+        url: `/${id}`,
+        method: 'PATCH',
+        body: newData, 
+      
+      }),
+      invalidatesTags: ['User'],
+    }),
+    deleteAllow: builder.mutation({
+      query: ({id, newData }) => ({
+        url: `/delete/${id}`,
+        method: 'PATCH',
+        body: newData, 
+      
+      }),
+      invalidatesTags: ['User'],
+    }),
     logout: builder.mutation({
       query: () => ({
         url: '/logout',
@@ -40,5 +58,5 @@ export const authApi = createApi({
   }),
 });
 
-export const { useCurrentQuery, useLoginMutation, useSignupMutation, useLogoutMutation } =
+export const { useCurrentQuery, useLoginMutation, useSignupMutation, useAddAllowMutation, useDeleteAllowMutation, useLogoutMutation } =
   authApi;

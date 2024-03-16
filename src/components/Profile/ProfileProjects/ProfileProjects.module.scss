@@ -31,3 +31,15 @@ color: #633BBC;
         color: #633BBC;
     }
 }
+
+.allowButton {
+    padding: 0;
+    margin-right: 5px;
+    border-color: transparent;
+    background-color: transparent;
+    color: #0b131a;
+
+    &:hover, &:focus {
+        color: #633BBC;
+    }
+}

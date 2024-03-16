@@ -7,6 +7,7 @@ import { useGetProjectByIdQuery } from '../../redux/projectSlice/projectSlice';
 import {projectsApi} from "../../redux/projectSlice/projectSlice";
 import {useDeleteEstimateMutation} from '../../redux/estimate/estimateApi';
 import {useAddPositionMutation, useDeletePositionMutation, useUpdatePositionMutation} from '../../redux/position/positionApi';
+import {useCurrentQuery} from "../../redux/auth/authApi";
 import Add from '../Icons/Add/Add';
 import Delete from '../Icons/Delete/Delete';
 import AddPosition from "../AddPosition/AddPosition";
@@ -22,12 +23,19 @@ import UpdateOk from '../Icons/Update/UpdateOk';
 function ProjectItem() {
   const { id } = useParams();
   const { data: project, error } = useGetProjectByIdQuery(id);
+  const { data: userData } = useCurrentQuery(); 
   const[mutate] = useUpdatePositionMutation();
   const [data, setData] = useState(project);
+  const [userRole, setUserRole] = useState(false);
 
   useEffect(() => {
-    setData(project); 
-}, [project]); 
+    setData(project);
+    if (userData) {
+      const role = userData?.user?.role;
+      const isUserRole = role !== "customer";
+         setUserRole(isUserRole);
+    } 
+}, [project, userData, userRole]); 
 
   
   const [showPosition, setShowPosition] = useState(false);
@@ -235,7 +243,10 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
         <>
         <div className={s.buttonAddContainer}>
           <p className={s.title}>Назва об'єкту: {data.title}</p>
-          <button type='button' className={s.buttonAddTitle} onClick={handleToggleEstimate}><Add width={"24"} height={"24"}/></button>
+          {userRole && (
+            <button type='button' className={s.buttonAddTitle} onClick={handleToggleEstimate}><Add width={"24"} height={"24"}/></button>
+          )}
+          
           </div>
           {data.description && <p className={s.address}>Адреса: {data.description}</p>}
 
@@ -243,7 +254,7 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
             <div key={item._id}>
               <div className={s.buttonAddContainer}>
               <p className={s.titleTable}>{item.title}</p>
-              
+              {userRole && (<>
                <button type='button' className={s.buttonAddTitle} onClick={() => onDeleteEstimate(data?._id, item?._id)}>
                 <Delete width={"24"} height={"24"}/>
                 </button>
@@ -251,6 +262,9 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                 onClick={() => updateEstimate(data?._id, item?._id, item?.title)}>
                   <Update width='28' height='28'/>
                     </button>
+              </>)}
+              
+              
               </div>     
               
               <table className={s.iksweb}>
@@ -258,9 +272,12 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                 <tr className={s.titleRow}>
            <td className={s.oneRow}>№ з/п.</td>
                  <td className={s.twoRow}>Назва 
+                 {userRole && (
                  <button type='button' onClick={() => data && item._id && handleTogglePosition(item._id, data._id)} className={s.buttonAdd}>
                  <Add width={"24"} height={"24"}/>
-                </button></td>
+                </button> 
+                 )}
+                 </td>
                  <td className={s.threeRow}>Одиниця</td>
                  <td className={s.threeRow}>Кількість</td>
                  <td className={s.threeRow}>Ціна в грн.</td>
@@ -272,7 +289,8 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                 <tr key={_id} className={s.dataRow}>
                 <td className={s.oneRow}>
                   {index + 1}
-                  <button  
+                  {userRole && (
+                    <button  
                   className={s.buttonUpdate}
                   onClick={() => {
                     isShow = !isShow;
@@ -286,7 +304,9 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                     (<Update width='22' height='22'/>)
                     }
                   
-                  </button>
+                  </button> 
+                  )}
+                 
                   </td>
                 <td>
                              
@@ -296,10 +316,13 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                 <td className={s.threeRow}><input id={_id} name='price' className={s.input} value={price} disabled={!isShow} onChange={onChange}/></td>
                 <td className={s.threeSix}>
                   {result}
-                  <button className={s.buttonDeletePosition} 
+                  {userRole && (
+                   <button className={s.buttonDeletePosition} 
                   onClick={() => deletePositionFn(item._id, data._id,  id)}>
                     <Delete width={"24"} height={"24"}/>
-                  </button>             
+                  </button>  
+                  )}
+                              
                   </td>
                       </tr>
                     ))}

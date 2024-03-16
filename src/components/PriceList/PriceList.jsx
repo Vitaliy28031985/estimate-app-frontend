@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {useGetPriceQuery, useUpdatePriceMutation, useDeletePriceMutation} from "../../redux/price/priceApi";
+
 import Add from "../Icons/Add/Add";
 import Modal from "../Modal/Modal";
 import AddPrice from "../AddPrice/AddPrice";
@@ -15,7 +16,10 @@ const [showModal, serShowModal] = useState(false);
  const {data: price} = useGetPriceQuery();
  const [data, setData] = useState(price);
  const [deletePrice] = useDeletePriceMutation();
- const[mutate] = useUpdatePriceMutation()
+ const[mutate] = useUpdatePriceMutation();
+
+
+
 
  useEffect(() => {
     setData(price); 
