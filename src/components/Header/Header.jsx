@@ -1,8 +1,9 @@
 import { NavLink,  useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState,  useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useLogoutMutation} from "../../redux/auth/authApi";
 import { unsetCredentials, selectIsLoggedIn } from '../../redux/auth/authSlice';
+import {useCurrentQuery} from "../../redux/auth/authApi";
 import {priceApi} from "../../redux/price/priceApi";
 import {projectsApi} from "../../redux/projectSlice/projectSlice";
 import Burger from "../Icons/Burger/Burger";
@@ -15,6 +16,17 @@ function Header({showRegister}) {
     const dispatch = useDispatch();
     const [logout] = useLogoutMutation();
     const isLoggedIn = useSelector(selectIsLoggedIn);
+
+    const { data: userData } = useCurrentQuery(); 
+    const [userRole, setUserRole] = useState(false);
+    
+    useEffect(() => {  
+      if (userData) {
+        const role = userData?.user?.role;
+        const isUserRole = role !== "customer";
+           setUserRole(isUserRole);
+      }   
+  }, [userData, userRole]);
 
     let location = useLocation();
 
@@ -50,7 +62,9 @@ function Header({showRegister}) {
                 )}
                 {isLoggedIn && (
                  <li>
-                <NavLink className={({ isActive }) => `link` + (isActive ? ` link-min` : '')} to='/price'>ПРАЙС</NavLink>
+                  {userRole && (
+                 <NavLink className={({ isActive }) => `link` + (isActive ? ` link-min` : '')} to='/price'><div onClick={handleToggle}>ПРАЙС</div></NavLink>   
+                  )}
                 </li>   
                 )}
                 {isLoggedIn && (

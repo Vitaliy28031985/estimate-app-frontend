@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useGetProjectByIdQuery } from '../../redux/projectSlice/projectSlice';
 import { useUpdateAdvanceMutation, useDeleteAdvanceMutation} from '../../redux/advances/advancesApi';
+import {useCurrentQuery} from "../../redux/auth/authApi";
 import {projectsApi} from "../../redux/projectSlice/projectSlice";
 import Modal from '../Modal/Modal';
 import AddAdvance from '../AddAdvance/AddAdvance';
@@ -15,12 +16,14 @@ import s from "./AdvancesItem.module.scss";
 function AdvancesItem() {
     const { id } = useParams();
     const { data: project} = useGetProjectByIdQuery(id);
+    const { data: userData } = useCurrentQuery(); 
     const [data, setData] = useState(project);
     const dispatch = useDispatch();
     const [mutate] = useUpdateAdvanceMutation();
     const [deleteAdvance] = useDeleteAdvanceMutation();
 
     const [isShowAdd, setIsShowAdd] = useState(false);
+    const [userRole, setUserRole] = useState(false);
 
     const handleToggleAdd = () => {
 
@@ -28,8 +31,13 @@ function AdvancesItem() {
       }
 
   useEffect(() => {
-    setData(project); 
-}, [project]); 
+    setData(project);
+    if (userData) {
+      const role = userData?.user?.role;
+      const isUserRole = role !== "customer";
+         setUserRole(isUserRole);
+    }   
+}, [project, userData, userRole]); 
 
 const addIsToggle = (id, currentIsShow) => {
   setData(prevData => {
@@ -83,7 +91,10 @@ const onChange = (e) => {
 
       <div className={s.buttonsContainer}>
       <h1 className={s.title}>Аванс</h1>
-      <button onClick={handleToggleAdd}><Add width={'24'} height={'24'}/></button>
+      {userRole && (
+            <button onClick={handleToggleAdd}><Add width={'24'} height={'24'}/></button>
+      )}
+  
       </div>
       <table className={s.iksweb}>
                 <tbody>
@@ -99,7 +110,8 @@ const onChange = (e) => {
                 <tr key={id} className={s.dataRow}>
                 <td className={s.oneRow}>
                   {index + 1}
-                  <button  
+                  {userRole && (
+                    <button  
                   className={s.buttonUpdate}
                   onClick={() => {
                     isShow = !isShow;
@@ -107,28 +119,28 @@ const onChange = (e) => {
                     if(!isShow) {
                        handleSubmit(data?._id, id, {comment, date, sum})
                     }
-                    }}
-                  >
+                    }}>
                     {isShow ? (<UpdateOk width='22' height='22'/>) :
                     (<Update width='22' height='22'/>)
                     }
                   
-                  </button>
+                  </button> 
+                  )}
                     </td>
                        
                 <td className={s.threeRow}><input id={id} name='comment'  className={s.input} value={comment} disabled={true} onChange={onChange}/></td>
                 <td className={s.threeRow}><input id={id} name='date' className={s.input} value={date} disabled={!isShow} onChange={onChange}/></td>
                 <td className={s.threeRow}><input id={id} name='sum' className={s.input} value={sum} disabled={!isShow} onChange={onChange}/>
-                <button type='button' className={s.buttonAddTitle}  onClick={ async () => 
+                {userRole && (
+                 <button type='button' className={s.buttonAddTitle}  onClick={ async () => 
                   {
-                    
                    await deleteAdvance({idPro: data?._id, idAdv: id});
                     dispatch(projectsApi.util.resetApiState());
                 }
-                  }
-                    >
+                  }>
                 <Delete width={"24"} height={"24"}/>
-                </button>
+                </button> 
+                )}
                 </td>
                       </tr>
                     ))}
