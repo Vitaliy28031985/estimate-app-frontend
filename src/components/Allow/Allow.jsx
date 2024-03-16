@@ -43,7 +43,8 @@ if(name === "notAllow") {
       <button className={s.closeButton} type="button" onClick={isShowModal}>
         <Close width={'24'} height={'24'} />
       </button>
-      <form action="" name='allow' onSubmit={handleSubmit}>
+<div className={s.formContainer}>
+      <form className={s.form} action="" name='allow' onSubmit={handleSubmit}>
     
         <div>
           <p className={s.label}>Email Якому потрібно надати дозвіл</p>
@@ -57,8 +58,9 @@ if(name === "notAllow") {
         </div>
         <button disabled={emailAllow === ""} className={s.button}>Надати дозвіл</button>
       </form>
-
-      <form action="" name='notAllow' onSubmit={handleSubmit}>
+</div>
+<div className={s.formContainer}>
+      <form className={s.form} action="" name='notAllow' onSubmit={handleSubmit}>
         <div>
           <p className={s.label}>Email Від якого потрібно забрати дозвіл</p>
           <input
@@ -72,6 +74,7 @@ if(name === "notAllow") {
 
         <button disabled={emailNotAllow === ""} className={s.button}>Забрати дозвіл</button>
       </form>
+</div>
     </div>
   );
 }

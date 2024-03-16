@@ -128,7 +128,7 @@ const onChange = (e) => {
                   )}
                     </td>
                        
-                <td className={s.threeRow}><input id={id} name='comment'  className={s.input} value={comment} disabled={true} onChange={onChange}/></td>
+                <td className={s.threeRow}><input id={id} name='comment'  className={s.input} value={comment} disabled={!isShow} onChange={onChange}/></td>
                 <td className={s.threeRow}><input id={id} name='date' className={s.input} value={date} disabled={!isShow} onChange={onChange}/></td>
                 <td className={s.threeRow}><input id={id} name='sum' className={s.input} value={sum} disabled={!isShow} onChange={onChange}/>
                 {userRole && (
