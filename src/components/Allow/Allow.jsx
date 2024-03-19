@@ -110,14 +110,7 @@ if(name === "notAllow") {
       <form className={s.form} action="" name='notAllow' onSubmit={handleSubmit}>
         <div>
           <p className={s.label}>Email Від якого потрібно забрати дозвіл</p>
-          {/* <input
-            type="email"
-            name="emailNotAllow"
-            className={s.input}
-            onChange={handleChange}
-            value={emailNotAllow}
-          /> */}
-
+        
       <select className={s.input}  name="emailNotAllow" id="emailNotAllow" onChange={handleChange}>
           {userEmailList?.map(email =>
            (<option value={email} >{email}</option>))}

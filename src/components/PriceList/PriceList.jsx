@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import {useGetPriceQuery, useUpdatePriceMutation, useDeletePriceMutation} from "../../redux/price/priceApi";
-
+import {
+    useGetUnitQuery,
+    useDeleteUnitMutation,
+    useUpdateUnitMutation} from "../../redux/unit/unitApi"; 
 import Add from "../Icons/Add/Add";
 import Modal from "../Modal/Modal";
 import AddPrice from "../AddPrice/AddPrice";
@@ -8,15 +11,21 @@ import Delete from '../Icons/Delete/Delete';
 import s from "./PriceList.module.scss";
 import Update from '../Icons/Update/UpdateIcon';
 import UpdateOk from '../Icons/Update/UpdateOk';
+import AddUnit from '../AddUnit/AddUnit';
 
 function PriceList() {
 const [filter, setFilter] = useState('')
 const [showModal, serShowModal] = useState(false);
+const [showAddUnit, setShowAddUnit] = useState(false);
 
  const {data: price} = useGetPriceQuery();
  const [data, setData] = useState(price);
  const [deletePrice] = useDeletePriceMutation();
  const[mutate] = useUpdatePriceMutation();
+
+ const {data: units} = useGetUnitQuery();
+const [deleteUnit] = useDeleteUnitMutation()
+ 
 
 
 
@@ -28,6 +37,10 @@ const [showModal, serShowModal] = useState(false);
 
  const handleToggleAddPrice = () => {
     serShowModal(showModal => !showModal);
+}
+
+const handleToggleAddUnit = () => {
+    setShowAddUnit(showAddUnit => !showAddUnit);
 }
 
 
@@ -119,6 +132,33 @@ const onChange = (e) => {
 </table>
 {showModal && (<Modal><AddPrice isShowModal={handleToggleAddPrice}/></Modal>)}
 
+<div>
+<table className={s.iksweb}>
+       <tbody>
+		<tr className={s.tableMin}>
+			<td className={s.rowOne}>Найменування одиниці
+            <button onClick={handleToggleAddUnit} className={s.buttonAdd}><Add width={"24"} height={"24"}/></button>
+            </td>
+		</tr>
+      {units && units.map(({_id, title}) => (
+        <tr key={_id}>
+            	  
+           <td className={s.rowOne}>
+            <div className={s.unitButtons}>
+            <p>{title}</p>
+            <div>
+                
+                <button className={s.deleteUnit} onClick={() => deleteUnit(_id)}><Delete width={"24"} height={"24"}/></button>
+                <button className={s.deleteUnit}><Update width='22' height='22'/></button>
+            </div>
+            </div>
+            </td> 	
+		</tr>
+        ))}	    
+        </tbody>
+</table>
+</div>
+{showAddUnit && (<Modal><AddUnit isShowModal={handleToggleAddUnit}/></Modal>)}
      </div>
     );
   }
