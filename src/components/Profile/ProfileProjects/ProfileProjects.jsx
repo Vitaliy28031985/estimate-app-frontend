@@ -13,7 +13,7 @@ function ProfileProjects() {
     const [showModal, setShowModal] = useState(false); 
     const [idPro, setIdPro] = useState('');
     const {data} = useGetProjectsQuery();
-    const [addAllow] = useAddAllowMutation()
+    const [addAllow] = useAddAllowMutation();
     const [deleteAllow] = useDeleteAllowMutation();
     const [userRole, setUserRole] = useState(false);
 
@@ -25,6 +25,8 @@ function ProfileProjects() {
         }   
     }, [userData, userRole]); 
 
+
+
     const handleToggleModal = async (id) => {
          
         setShowModal(showModal => !showModal);
@@ -33,9 +35,12 @@ function ProfileProjects() {
       }
 
     const allowSubmit = async (allowObj, name) => {
-        if(name === "allow") {
-        await addAllow({id: idPro, newData: allowObj})
-        toast(`Дозвіл до кошторису користувача з email: ${allowObj.email} надано`);
+        
+        if(name === "allow") { 
+           
+            await addAllow({ id: idPro, newData: allowObj });
+            toast(`Дозвіл до кошторису користувача з email: ${allowObj.email} надано`);
+
         }
         if(name === "notAllow") {
             await deleteAllow({id: idPro, newData: allowObj})
@@ -60,7 +65,7 @@ function ProfileProjects() {
             ))}
             
         </ul>
-        {showModal && ( <Modal><Allow isShowModal={handleToggleModal} allowFu={allowSubmit}/></Modal>)}
+        {showModal && ( <Modal><Allow isShowModal={handleToggleModal} allowFu={allowSubmit} id={idPro}/></Modal>)}
     </div>  
     )
    

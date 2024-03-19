@@ -142,7 +142,7 @@ table.iksweb th {
 .total {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 80px;
     margin-top: 50px;
     color:  #486581;
@@ -198,12 +198,21 @@ table.iksweb th {
 
 .buttonDeletePosition {
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 0px;
+    right: -13px;
     margin-right: 10px;
     padding: 0;
     border-color: transparent;
     background: transparent;
+    @media screen and (min-width: 768px) {
+        top: 0px;
+        right: -15px; 
+      
+    }
+    @media screen and (min-width: 1200px) {
+        top: 2px;
+        right: 2px; 
+    }
 
 }
 
@@ -224,6 +233,8 @@ padding-top: 12px;
 padding-bottom: 12px;
 padding-left: 20px;
 padding-right: 20px;
+margin-left: 50px;
+margin-top: 20px;
 border-radius: 5px;
 background: #0b131a; 
 color: #fff;

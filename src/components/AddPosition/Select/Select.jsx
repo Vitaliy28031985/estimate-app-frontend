@@ -2,11 +2,13 @@ import { useState} from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useGetPriceQuery} from "../../../redux/price/priceApi";
+import {useGetUnitQuery} from "../../../redux/unit/unitApi"
 import s from "./Select.module.scss"
 
 function Select({isShowModal, add}) {
   const [filter, setFilter] = useState('')
-  const {data} = useGetPriceQuery()
+  const {data} = useGetPriceQuery();
+  const {data: units} = useGetUnitQuery();
 
   const [title, setTitle] = useState('');
   const [unit, setUnit] = useState('');
@@ -41,6 +43,7 @@ const filteredContacts =  data?.filter(item =>
 
 
  const handleSubmit = async e => {
+  
   e.preventDefault();
   if(title === 'empty' || unit === '' || number === '' || title === '') {
     toast("Усі поля мають бути заповнені")
@@ -74,12 +77,19 @@ await add({title, unit, number: Number(number), price: priceCurrent})
  <option value="empty" selected>Вибери вид роботи</option>
 </select>
 <div>
-  <p className={s.label}>Одиниця</p>
-  <input className={s.input} type="text" value={unit} name="unit" onChange={handleChange} />
+  <label for='unit' className={s.label}>Одиниця</label>
+  <select className={s.input}  name="unit" id="unit" onChange={handleChange}>
+{units && units?.map(({title}) =>
+(
+   <option value={title} >{title}</option>
+  
+))}
+ <option value="empty" selected>Вибери одиницю виміру</option>
+</select>
 </div>
 <div>
-  <p className={s.label}>Кількість</p>
-  <input className={s.input} type="number" value={number} name="number" onChange={handleChange} />
+  <label for="number" className={s.label}>Кількість</label>
+  <input className={s.input} type="number" value={number} name="number" id='number' onChange={handleChange} />
 </div>
 <button className={s.button}>Додати</button>
 </form>

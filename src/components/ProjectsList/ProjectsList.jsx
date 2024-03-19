@@ -9,7 +9,7 @@ import Modal from '../Modal/Modal';
 import s from "./ProjectsList.module.scss";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import updates from "../../images/update-12-16.png";
+import Update from '../Icons/Update/UpdateIcon';
 
 
 function ProjectsList() {
@@ -79,7 +79,7 @@ const updateProject = async (id, title, description) => {
          <li className={s.projectItem} key={_id} id={_id}>
           {userRole && (
             <button className={s.buttonDelete} onClick={() => updateProject(_id, title, description)}>
-          <img src={updates} width='20' height='20' alt='update'/> 
+          <Update width='20' height='20' /> 
           </button> 
           )}
          

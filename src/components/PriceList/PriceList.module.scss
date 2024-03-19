@@ -156,3 +156,24 @@ background: var(--Blue-Grey-Blue-Grey-050, #F0F4F8);
         fill: currentColor;
     
     } 
+  .unitButtons {
+    display: flex;
+    justify-content: space-between;
+  }
+    .deleteUnit {
+        padding: 2px;
+        margin-right: 5px;
+        background: transparent;
+        border-color: transparent;
+        border-radius: 50%;
+        color:#486581;
+    
+        &:hover, &:focus {
+        color: #fff;
+          background: #347c99;   
+        }  
+    }
+
+    .deleteUnit svg {
+        fill: currentColor;
+    }

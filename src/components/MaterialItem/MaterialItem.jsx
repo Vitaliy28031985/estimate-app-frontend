@@ -127,10 +127,26 @@ const onChange = (e) => {
                   )}
                  
                     </td>
-                <td><input id={id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange} /></td>                 
-                <td className={s.threeRow}><input id={id} name='order'  className={s.input} value={order} disabled={!isShow} onChange={onChange} /></td>
-                <td className={s.threeRow}><input id={id} name='date' className={s.input} value={date} disabled={!isShow} onChange={onChange} /></td>
-                <td className={s.threeRow}><input id={id} name='sum' className={s.input} value={sum} disabled={!isShow} onChange={onChange} />
+                <td>
+                  {!isShow ? 
+                (<p>{title}</p>) :
+                ( <input id={id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange} />) 
+                }</td>                 
+                <td className={s.threeRow}>
+                {!isShow ? 
+                (<p>{order}</p>) :
+                (<input id={id} name='order'  className={s.input} value={order} disabled={!isShow} onChange={onChange} />)  
+              }</td>
+                <td className={s.threeRow}>
+                {!isShow ? 
+                (<p>{date}</p>) : 
+                (<input id={id} name='date' className={s.input} value={date} disabled={!isShow} onChange={onChange} />)
+              }</td>
+                <td className={s.threeRow}>
+                {!isShow ? 
+                 (<p>{sum}</p>) :
+                 (<input id={id} name='sum' className={s.input} value={sum} disabled={!isShow} onChange={onChange} />)
+              }   
                 {userRole && (
                    <button type='button' className={s.buttonAddTitle}  onClick={ async () => 
                   {
