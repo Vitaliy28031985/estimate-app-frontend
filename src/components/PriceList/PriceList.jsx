@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import {useGetPriceQuery, useUpdatePriceMutation, useDeletePriceMutation} from "../../redux/price/priceApi";
 import {
     useGetUnitQuery,
-    useDeleteUnitMutation,
-    useUpdateUnitMutation} from "../../redux/unit/unitApi"; 
+    useDeleteUnitMutation} from "../../redux/unit/unitApi"; 
 import Add from "../Icons/Add/Add";
 import Modal from "../Modal/Modal";
 import AddPrice from "../AddPrice/AddPrice";
@@ -149,7 +148,7 @@ const onChange = (e) => {
             <div>
                 
                 <button className={s.deleteUnit} onClick={() => deleteUnit(_id)}><Delete width={"24"} height={"24"}/></button>
-                <button className={s.deleteUnit}><Update width='22' height='22'/></button>
+                {/* <button className={s.deleteUnit}><Update width='22' height='22'/></button> */}
             </div>
             </div>
             </td> 	

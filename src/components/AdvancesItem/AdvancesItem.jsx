@@ -128,9 +128,21 @@ const onChange = (e) => {
                   )}
                     </td>
                        
-                <td className={s.threeRow}><input id={id} name='comment'  className={s.input} value={comment} disabled={!isShow} onChange={onChange}/></td>
-                <td className={s.threeRow}><input id={id} name='date' className={s.input} value={date} disabled={!isShow} onChange={onChange}/></td>
-                <td className={s.threeRow}><input id={id} name='sum' className={s.input} value={sum} disabled={!isShow} onChange={onChange}/>
+                <td className={s.threeRow}>
+                {!isShow ?
+                (<p>{comment}</p>) :
+                (<input id={id} name='comment'  className={s.input} value={comment} disabled={!isShow} onChange={onChange}/>) 
+              }</td>
+                <td className={s.threeRow}>
+                {!isShow ?
+                (<p>{date}</p>) :
+                (<input id={id} name='date' className={s.input} value={date} disabled={!isShow} onChange={onChange}/>)
+                }</td>
+                <td className={s.threeRow}>
+                {!isShow ?
+                (<p>{sum}</p>) :
+                (<input id={id} name='sum' className={s.input} value={sum} disabled={!isShow} onChange={onChange}/>)  
+              }  
                 {userRole && (
                  <button type='button' className={s.buttonAddTitle}  onClick={ async () => 
                   {

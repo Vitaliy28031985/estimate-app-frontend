@@ -94,10 +94,22 @@ color: #FFF;
  }
  .buttonDelete {
     padding: 0;
-    background: transparent;
+    background: #FFF;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
     border-color: transparent;
     margin-right: 5px;
+    color: #334E68;
     @media screen and (min-width: 768px) {
         margin-right: 20px;  
     } 
+    &:hover, &:focus {
+        color: #FFF;
+        background: #04D361;
+    } 
+}
+
+.buttonDelete svg {
+    fill: currentColor;
 }

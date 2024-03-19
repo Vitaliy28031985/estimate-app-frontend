@@ -309,17 +309,31 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                  
                   </td>
                 <td>
-                             
-                <input id={_id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange}/></td>                 
-                <td className={s.threeRow}><input id={_id} name='unit'  className={s.input} value={unit} disabled={!isShow} onChange={onChange}/></td>
-                <td className={s.threeRow}><input id={_id} name='number' className={s.input} value={number} disabled={!isShow} onChange={onChange}/></td>
-                <td className={s.threeRow}><input id={_id} name='price' className={s.input} value={price} disabled={!isShow} onChange={onChange}/></td>
+                {!isShow ? 
+                (<p>{title}</p>) : 
+                (<input id={_id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange}/>)
+                }</td>                 
+                <td className={s.threeRow}>{!isShow ? 
+                (<p>{unit}</p>) : 
+                (<input id={_id} name='unit'  className={s.input} value={unit} disabled={!isShow} onChange={onChange}/>)
+                }</td>
+                <td className={s.threeRow}>
+                {!isShow ? 
+                (<p>{number}</p>) :
+                (<input id={_id} name='number' className={s.input} value={number} disabled={!isShow} onChange={onChange}/>)}
+                 </td>
+               
+                <td className={s.threeRow}>
+                    {!isShow ? 
+                (<p>{price}</p>) :
+                (<input id={_id} name='price' className={s.input} value={price} disabled={!isShow} onChange={onChange}/>)
+                }</td>
                 <td className={s.threeSix}>
                   {result}
                   {userRole && (
                    <button className={s.buttonDeletePosition} 
                   onClick={() => deletePositionFn(item._id, data._id,  id)}>
-                    <Delete width={"24"} height={"24"}/>
+                    <Delete width={"20"} height={"20"}/>
                   </button>  
                   )}
                               
