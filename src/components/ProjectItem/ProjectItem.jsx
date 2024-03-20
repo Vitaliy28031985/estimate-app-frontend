@@ -283,9 +283,9 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                 </button> 
                  )}
                  </td>
-                 <td className={s.threeRow}>Одиниця</td>
-                 <td className={s.threeRow}>Кількість</td>
-                 <td className={s.threeRow}>Ціна в грн.</td>
+                 <td className={s.threeRow}><p className={s.threeRowTitleText}>Одиниця</p></td>
+                 <td className={s.threeRow}><p className={s.threeRowTitleText}>Кількість</p></td>
+                 <td className={s.threeRow}><p className={s.threeRowTitleText}>Ціна в грн.</p></td>
                  <td className={s.threeSix}>Сума в грн.</td>
              </tr>
 
@@ -397,7 +397,7 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
      
       
          <div className={s.total}>
-          <p>Аванс:</p>
+          <p>Аванс:            </p>
           {data?.advancesTotal && (
         <p>{data?.advancesTotal}</p>)}
       </div>
