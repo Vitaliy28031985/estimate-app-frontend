@@ -40,12 +40,17 @@ function MaterialItem() {
     }  
 }, [project, userData, userRole]); 
 
-const addIsToggle = (id, currentIsShow) => {
+const addIsToggle = (id, currentIsShow, name) => {
   setData(prevData => {
     const newData = { ...prevData };
      const newMaterials = newData.materials.map(material => {
       if(material.id === id) {
-        return { ...material, isShow: currentIsShow }; 
+        if(name === 'update') {
+        return { ...material, isShow: currentIsShow };
+      }
+      if(name === 'delete') {
+        return { ...material, isDelete: currentIsShow };
+    } 
       }
       return material;
      })
@@ -104,7 +109,7 @@ const onChange = (e) => {
              </tr>
 
                   {data?.materials &&
-                    data?.materials.map(({id, title, order, date, sum, isShow = false }, index) => (
+                    data?.materials.map(({id, title, order, date, sum, isShow = false, isDelete = false }, index) => (
                 <tr key={id} className={s.dataRow}>
                 <td className={s.oneRow}>
                   {index + 1}
@@ -113,7 +118,7 @@ const onChange = (e) => {
                   className={s.buttonUpdate}
                   onClick={() => {
                     isShow = !isShow;
-                    addIsToggle(id, isShow);
+                    addIsToggle(id, isShow, 'update');
                     if(!isShow) {
                        handleSubmit(data?._id, id, {title, order, date, sum})
                     }
@@ -148,18 +153,38 @@ const onChange = (e) => {
                  (<input id={id} name='sum' className={s.input} value={sum} disabled={!isShow} onChange={onChange} />)
               }   
                 {userRole && (
-                   <button type='button' className={s.buttonAddTitle}  onClick={ async () => 
+                   <button type='button' className={s.buttonAddTitle}  onClick={() => 
                   {
-                    
-                   await deleteMaterial({idPro: data?._id, idMat: id});
-                    dispatch(projectsApi.util.resetApiState());
-                }
+                    isDelete = !isDelete;
+                   addIsToggle(id, isDelete, 'delete');
+                  }
                   }
                     >
                 <Delete width={"24"} height={"24"}/>
                 </button>
                 )}
                
+               {isDelete && (
+                  <div className={s.deleteModalContainer}>
+                    <h4>{`Ви справді бажаєте видалити: ${title}`}</h4>
+                    <ul className={s.buttonContainer }>
+                        <li><button
+                        onClick={async() => {
+                            isDelete = !isDelete;
+                            addIsToggle(id, isDelete, 'delete');
+                            await deleteMaterial({idPro: data?._id, idMat: id});
+                            dispatch(projectsApi.util.resetApiState());
+                        }}
+                        >Так</button></li>
+                        <li><button
+                        onClick={ () => {
+                            isDelete = !isDelete;
+                            addIsToggle(id, isDelete, 'delete');
+                        }}
+                        >Ні</button></li>
+                    </ul>
+                </div>   
+                )}
                 
                 </td>
                       </tr>
@@ -179,3 +204,4 @@ const onChange = (e) => {
 }
 
 export default MaterialItem;
+

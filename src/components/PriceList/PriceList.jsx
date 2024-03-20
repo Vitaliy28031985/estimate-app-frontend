@@ -12,10 +12,12 @@ import Update from '../Icons/Update/UpdateIcon';
 import UpdateOk from '../Icons/Update/UpdateOk';
 import AddUnit from '../AddUnit/AddUnit';
 
+
 function PriceList() {
 const [filter, setFilter] = useState('')
 const [showModal, serShowModal] = useState(false);
 const [showAddUnit, setShowAddUnit] = useState(false);
+
 
  const {data: price} = useGetPriceQuery();
  const [data, setData] = useState(price);
@@ -50,11 +52,16 @@ const normalizeFilter = filter.toLowerCase();
 const filteredContacts =  data?.filter(item =>
   item.title.toLowerCase().includes(normalizeFilter)) ?? [];
 
-  const addIsToggle = (id, currentIsShow) => {
+  const addIsToggle = (id, currentIsShow, name) => {
     setData(prevData => {
         const newData = prevData.map(price => {
             if (price._id === id) {
-                return { ...price, isShow: currentIsShow };
+                if(name === 'update') {
+                    return { ...price, isShow: currentIsShow };
+                }
+                if(name === 'delete') {
+                    return { ...price, isDelete: currentIsShow };
+                }
             }
             return price; 
         });
@@ -99,14 +106,14 @@ const onChange = (e) => {
             </td>
 			<td className={s.twoRow}>Ціна за одиницю в грн.</td>
 		</tr>
-        {data && filteredContacts?.map(({_id, title, price, isShow = false}) => (
+        {data && filteredContacts?.map(({_id, title, price, isShow = false, isDelete = false}) => (
         <tr key={_id}>
 			<td className={s.rowOne} >
                    <button  
                   className={s.buttonUpdate}
                   onClick={() => {
                     isShow = !isShow;
-                    addIsToggle(_id, isShow);
+                    addIsToggle(_id, isShow, 'update');
                     if(!isShow) {
                        mutate({id: _id, newData: {title, price}});
                     }
@@ -127,9 +134,33 @@ const onChange = (e) => {
             (<p className={s.inputPrice}>{price}</p>) :
             (<input id={_id} name='price' className={s.inputPrice} value={price} disabled={!isShow} onChange={onChange} />) 
             }
-            <button className={s.buttonDelete} onClick={() => deletePrice(_id)}>
+            <button className={s.buttonDelete} onClick={() => {
+                isDelete = !isDelete;
+                addIsToggle(_id, isDelete, 'delete');
+            }}>
                 <Delete width={"24"} height={"24"}/>
                 </button>
+                {isDelete && (
+                  <div className={s.deleteModalContainer}>
+                    <h4>{`Ви справді бажаєте видалити: ${title}`}</h4>
+                    <ul className={s.buttonContainer }>
+                        <li><button
+                        onClick={() => {
+                            isDelete = !isDelete;
+                            addIsToggle(_id, isDelete, 'delete');
+                            deletePrice(_id);
+                        }}
+                        >Так</button></li>
+                        <li><button
+                        onClick={() => {
+                            isDelete = !isDelete;
+                            addIsToggle(_id, isDelete, 'delete');
+                        }}
+                        >Ні</button></li>
+                    </ul>
+                </div>   
+                )}
+               
             </td>
 		</tr>    
         ))}

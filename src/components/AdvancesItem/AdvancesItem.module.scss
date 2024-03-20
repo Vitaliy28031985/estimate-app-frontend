@@ -171,3 +171,46 @@ table.iksweb th {
     border-radius: 5px;
     color:#fff;
 }
+
+//modal delete
+
+.deleteModalContainer {
+    max-width: 100%;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    padding: 5px;
+    background: #334E68;
+    border: 2px solid #347c99;
+    border-radius: 5px;
+    z-index: 22;
+}
+
+.deleteModalContainer h4 {
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+    color: #F0F4F8;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buttonContainer button {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #F0F4F8; 
+    background: transparent;
+    border: 1px solid #F0F4F8;
+    border-radius: 2px;
+    &:hover, &:focus {
+        background-color: #F0F4F8;
+        color: #0b131a;
+
+    }
+}
