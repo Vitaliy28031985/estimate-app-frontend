@@ -179,13 +179,18 @@ const updateEstimate = async (projId, estId, currentName) => {
 
 
 
-const addIsToggle = (id, currentIsShow) => {
+const addIsToggle = (id, currentIsShow, name) => {
   setData(prevData => {
       const newData = { ...prevData }; 
       const newEstimates = newData.estimates.map(estimate => {
           const newPositions = estimate.positions.map(position => {
               if (position._id === id) {
+                if(name === 'update') {
                   return { ...position, isShow: currentIsShow }; 
+                }
+                if(name === 'delete') {
+                  return { ...position, isDelete: currentIsShow };
+              }
               }
               return position;
           });
@@ -285,7 +290,7 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
              </tr>
 
                   {item.positions &&
-                    item.positions.map(({ _id, id, title, unit, price, number, result, isShow = false }, index) => (
+                    item.positions.map(({ _id, id, title, unit, price, number, result, isShow = false, isDelete = false }, index) => (
                 <tr key={_id} className={s.dataRow}>
                 <td className={s.oneRow}>
                   {index + 1}
@@ -294,7 +299,7 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                   className={s.buttonUpdate}
                   onClick={() => {
                     isShow = !isShow;
-                    addIsToggle(_id, isShow);
+                    addIsToggle(_id, isShow, 'update');
                     if(!isShow) {
                        handleSubmit(data._id, item._id, id, {title, unit, number, price})
                     }
@@ -332,10 +337,36 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                   {result}
                   {userRole && (
                    <button className={s.buttonDeletePosition} 
-                  onClick={() => deletePositionFn(item._id, data._id,  id)}>
+                  onClick={() => {
+                    isDelete = !isDelete;
+                    addIsToggle(_id, isDelete, 'delete');
+                  }
+                  }>
                     <Delete width={"20"} height={"20"}/>
                   </button>  
-                  )}
+
+                 )}
+
+                {isDelete && (
+                  <div className={s.deleteModalContainer}>
+                    <h4>{`Ви справді бажаєте видалити: ${title}`}</h4>
+                    <ul className={s.buttonContainer }>
+                        <li><button
+                        onClick={() => {
+                            isDelete = !isDelete;
+                            addIsToggle(_id, isDelete, 'delete');
+                            deletePositionFn(item._id, data._id,  id)
+                        }}
+                        >Так</button></li>
+                        <li><button
+                        onClick={() => {
+                            isDelete = !isDelete;
+                            addIsToggle(_id, isDelete, 'delete');
+                        }}
+                        >Ні</button></li>
+                    </ul>
+                </div>   
+                )}
                               
                   </td>
                       </tr>
@@ -398,3 +429,5 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
 }
 
 export default ProjectItem;
+
+//deletePositionFn(item._id, data._id,  id)
