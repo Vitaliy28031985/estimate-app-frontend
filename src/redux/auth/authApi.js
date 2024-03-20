@@ -32,11 +32,10 @@ export const authApi = createApi({
       }),
     }),
     addAllow: builder.mutation({
-      query: ({id, newData }) => ({
+      query: ({ id, newData }) => ({
         url: `/${id}`,
         method: 'PATCH',
-        body: newData, 
-      
+        body: newData,
       }),
       invalidatesTags: ['User'],
     }),

@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Modal from '../../Modal/Modal';
 import s from "./ProfileProjects.module.scss"
 import Allow from '../../Allow/Allow';
+
 function ProfileProjects() {
     const { data: userData } = useCurrentQuery(); 
     const [showModal, setShowModal] = useState(false); 
@@ -25,6 +26,7 @@ function ProfileProjects() {
         }   
     }, [userData, userRole]); 
 
+   
 
 
     const handleToggleModal = async (id) => {
@@ -37,15 +39,20 @@ function ProfileProjects() {
     const allowSubmit = async (allowObj, name) => {
         
         if(name === "allow") { 
-           
-            await addAllow({ id: idPro, newData: allowObj });
-            toast(`Дозвіл до кошторису користувача з email: ${allowObj.email} надано`);
-
-        }
+            const res = await addAllow({ id: idPro, newData: allowObj });
+            if(res.error) {
+                toast.error(res.error.data.message)
+            } else {
+               toast(`Дозвіл до кошторису користувача з email: ${allowObj.email} надано`);  
+            }
+                     }
         if(name === "notAllow") {
-            await deleteAllow({id: idPro, newData: allowObj})
+            const res = await deleteAllow({id: idPro, newData: allowObj})
+            if(res.error) {
+                toast.error(res.error.data.message)
+            } else{
             toast(`Дозвіл до кошторису користувача з email: ${allowObj.email}  скасовано`);
-        }
+        }}
     }
     return(
        <div className={s.projectsListContainer}>
