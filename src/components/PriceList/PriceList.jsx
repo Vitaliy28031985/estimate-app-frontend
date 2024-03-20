@@ -117,9 +117,16 @@ const onChange = (e) => {
                     }
                   
                   </button>
-                <input id={_id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange} />
+                  {!isShow ? 
+                  (<p className={s.inputTitle}>{title}</p>) :
+                  (<input id={_id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange} />)
+                  }
                 </td>
-			<td className={s.twoRow}> <input id={_id} name='price' className={s.inputPrice} value={price} disabled={!isShow} onChange={onChange} />
+			<td className={s.twoRow}> 
+            {!isShow ? 
+            (<p className={s.inputPrice}>{price}</p>) :
+            (<input id={_id} name='price' className={s.inputPrice} value={price} disabled={!isShow} onChange={onChange} />) 
+            }
             <button className={s.buttonDelete} onClick={() => deletePrice(_id)}>
                 <Delete width={"24"} height={"24"}/>
                 </button>
