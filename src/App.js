@@ -9,7 +9,8 @@ import Header from "./components/Header/Header";
 import Modal from "./components/Modal/Modal";
 import MaterialsPage from "./Pages/Materials/MaterialsPage";
 import Advances from "./Pages/Advances/AdvancesPage";
-import LoaderComponent from './components/LoaderComponent/LoaderComponent'
+import LoaderComponent from './components/LoaderComponent/LoaderComponent';
+import NotFoundPage from "./Pages/NotFound/NotFoundPage";
 import s from "./App.module.scss";
 
 
@@ -44,7 +45,7 @@ function App() {
         <Route path="/projects/:id" element={<PrivateRoute><Project/></PrivateRoute>}/>
         <Route path="/materials/:id" element={<PrivateRoute><MaterialsPage/></PrivateRoute>}/>
         <Route path="/advances/:id" element={<PrivateRoute><Advances/></PrivateRoute>}/>
-        <Route path="*" element={<p>page not found</p>} />
+        <Route path="*" element={<NotFoundPage/>} />
       </Routes>
       </Suspense>
       </div>
