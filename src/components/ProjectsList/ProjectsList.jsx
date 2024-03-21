@@ -18,7 +18,8 @@ function ProjectsList() {
 const [showProject, setShowProject] = useState(false)
 const [showUpdateModal, setShowUpdateModal] = useState(false); 
 const [newData, setNewData] = useState(null);
-const {data} = useGetProjectsQuery();
+const {data: project} = useGetProjectsQuery();
+const [data, setData] = useState(project);
 const [deleteProject] = useDeleteProjectMutation();
 const [userRole, setUserRole] = useState(false);
 
@@ -30,12 +31,13 @@ const { data: userData } = useCurrentQuery();
 
 
 useEffect(() => {
+  setData(project); 
   if (userData) {
     const role = userData?.user?.role;
     const isUserRole = role !== "customer";
        setUserRole(isUserRole);
   }
-}, [userData, userRole]);
+}, [project, userData, userRole]);
 
 
 
@@ -63,6 +65,19 @@ const updateProject = async (id, title, description) => {
 
 } 
 
+const addIsToggle = (id, currentIsShow) => {
+  setData(prevData => {
+      const newData = prevData.map(project => {
+          if (project._id === id) {          
+                  return { ...project, isDelete: currentIsShow };
+          }
+          return project; 
+      });
+  
+      return newData; 
+  });
+};
+
     return (
       <div >
         <ToastContainer draggable={true} />
@@ -75,7 +90,7 @@ const updateProject = async (id, title, description) => {
      
      </div>
    <ul className={s.projectContainer}>
-    {data && data.map(({_id, title, description, total}) => (
+    {data && data.map(({_id, title, description, total, isDelete = false}) => (
          <li className={s.projectItem} key={_id} id={_id}>
           {userRole && (
             <button className={s.buttonDelete} onClick={() => updateProject(_id, title, description)}>
@@ -89,10 +104,33 @@ const updateProject = async (id, title, description) => {
         <div className={s.buttonContainer}>
         <NavLink className={s.projectLink} to={`/projects/${_id}`}>Детальніше</NavLink>
         {userRole && (
-         <button className={s.projectLink} onClick={() => onDeleteProject(_id)}>Видалити</button> 
+         <button className={s.projectLink} onClick={() => {
+          isDelete = !isDelete;
+          addIsToggle(_id, isDelete);
+         }}>Видалити</button> 
         )}
         
         </div>
+        {isDelete && (
+                  <div className={s.deleteModalContainer}>
+                    <h4>{`Ви справді бажаєте видалити: ${title}`}</h4>
+                    <ul className={s.buttonContainer }>
+                        <li><button className={s.onDelete}
+                        onClick={() => {
+                            isDelete = !isDelete;
+                            addIsToggle(_id, isDelete);
+                            onDeleteProject(_id);
+                        }}
+                        >Так</button></li>
+                        <li><button className={s.noDelete}
+                        onClick={() => {
+                            isDelete = !isDelete;
+                            addIsToggle(_id, isDelete);
+                        }}
+                        >Ні</button></li>
+                    </ul>
+                </div>   
+                )}
     </li> 
     ))}
   
@@ -105,3 +143,4 @@ const updateProject = async (id, title, description) => {
   }
   
   export default ProjectsList;
+  

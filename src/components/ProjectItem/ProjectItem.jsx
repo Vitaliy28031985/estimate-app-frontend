@@ -352,6 +352,7 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                     <h4>{`Ви справді бажаєте видалити: ${title}`}</h4>
                     <ul className={s.buttonContainer }>
                         <li><button
+                        className={s.onDelete}
                         onClick={() => {
                             isDelete = !isDelete;
                             addIsToggle(_id, isDelete, 'delete');
@@ -359,6 +360,7 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
                         }}
                         >Так</button></li>
                         <li><button
+                        className={s.noDelete}
                         onClick={() => {
                             isDelete = !isDelete;
                             addIsToggle(_id, isDelete, 'delete');

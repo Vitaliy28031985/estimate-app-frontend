@@ -164,6 +164,7 @@ const onChange = (e) => {
                     <h4>{`Ви справді бажаєте видалити: ${comment}`}</h4>
                     <ul className={s.buttonContainer }>
                         <li><button
+                        className={s.onDelete}
                         onClick={async () => {
                             isDelete = !isDelete;
                             addIsToggle(id, isDelete, 'delete');
@@ -172,6 +173,7 @@ const onChange = (e) => {
                         }}
                         >Так</button></li>
                         <li><button
+                        className={s.noDelete}
                         onClick={() => {
                             isDelete = !isDelete;
                             addIsToggle(id, isDelete, 'delete');
