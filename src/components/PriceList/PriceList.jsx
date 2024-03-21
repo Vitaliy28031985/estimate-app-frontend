@@ -144,14 +144,14 @@ const onChange = (e) => {
                   <div className={s.deleteModalContainer}>
                     <h4>{`Ви справді бажаєте видалити: ${title}`}</h4>
                     <ul className={s.buttonContainer }>
-                        <li><button
+                        <li><button className={s.onDelete}
                         onClick={() => {
                             isDelete = !isDelete;
                             addIsToggle(_id, isDelete, 'delete');
                             deletePrice(_id);
                         }}
                         >Так</button></li>
-                        <li><button
+                        <li><button className={s.noDelete}
                         onClick={() => {
                             isDelete = !isDelete;
                             addIsToggle(_id, isDelete, 'delete');
@@ -186,7 +186,6 @@ const onChange = (e) => {
             <div>
                 
                 <button className={s.deleteUnit} onClick={() => deleteUnit(_id)}><Delete width={"24"} height={"24"}/></button>
-                {/* <button className={s.deleteUnit}><Update width='22' height='22'/></button> */}
             </div>
             </div>
             </td> 	

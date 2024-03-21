@@ -16,6 +16,7 @@ grid-gap: 18px;
     
 }
 .projectItem {
+    position: relative;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 20px;
@@ -113,3 +114,58 @@ color: #FFF;
 .buttonDelete svg {
     fill: currentColor;
 }
+
+// delete modal
+
+.deleteModalContainer {
+    max-width: 100%;
+    position: absolute;
+    top: 180px;
+    left: 0;
+    padding: 5px;
+    background: #334E68;
+    border: 2px solid #347c99;
+    border-radius: 5px;
+    z-index: 22;
+}
+
+.deleteModalContainer h4 {
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+    color: #F0F4F8;
+}
+
+.buttonContainerModal {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buttonContainerModal button {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: transparent;
+    border-radius: 2px;
+}
+
+.onDelete {
+    border: 1px solid red;
+    color: red;
+    &:hover, &:focus {
+        color: #F0F4F8;
+        background: red;  
+    }
+}
+
+.noDelete {
+    border: 1px solid #04D361;
+    color: #04D361; 
+    &:hover, &:focus {
+        color: #F0F4F8;
+        background: #04D361;  
+    } 
+}
+
