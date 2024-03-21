@@ -13,6 +13,7 @@ import Delete from '../Icons/Delete/Delete';
 import AddPosition from "../AddPosition/AddPosition";
 import AddEstimate from "../AddEstimate/AddEstimate";
 import UpdateEstimate from "../UpdateEstimate/UpdateEstimate";
+import ForbiddenPage from '../../Pages/Forbidden/ForbiddenPage';
 import s from './ProjectItem.module.scss';
 import Modal from '../Modal/Modal';
 import { ToastContainer, toast } from 'react-toastify';
@@ -235,201 +236,208 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
 }
 
 
+
   return (
+    <>
+    {project === undefined ? (<ForbiddenPage/>) : 
+  ( 
     <div>
-      <ul className={s.linksList}>
-      <li className={s.buttonNavCurrent}>Кошторис</li>
-        <li className={s.buttonNav}><NavLink className={s.buttonNavLink} to={`/materials/${data?._id}`}>Матеріали</NavLink></li>
-        <li className={s.buttonNav}><NavLink className={s.buttonNavLink} to={`/advances/${data?._id}`}>Аванс</NavLink></li>
-      </ul>
-      <ToastContainer draggable={true} />
-      <button className={s.createPdfFileButton} onClick={generatePdf}>Створити PDF файл</button>
-      {data && (
-        <>
-        <div className={s.buttonAddContainer}>
-          <p className={s.title}>Назва об'єкту: {data.title}</p>
-          {userRole && (
-            <button type='button' className={s.buttonAddTitle} onClick={handleToggleEstimate}><Add width={"24"} height={"24"}/></button>
-          )}
-          
-          </div>
-          {data.description && <p className={s.address}>Адреса: {data.description}</p>}
+    <ul className={s.linksList}>
+    <li className={s.buttonNavCurrent}>Кошторис</li>
+      <li className={s.buttonNav}><NavLink className={s.buttonNavLink} to={`/materials/${data?._id}`}>Матеріали</NavLink></li>
+      <li className={s.buttonNav}><NavLink className={s.buttonNavLink} to={`/advances/${data?._id}`}>Аванс</NavLink></li>
+    </ul>
+    <ToastContainer draggable={true} />
+    <button className={s.createPdfFileButton} onClick={generatePdf}>Створити PDF файл</button>
+    {data && (
+      <>
+      <div className={s.buttonAddContainer}>
+        <p className={s.title}>Назва об'єкту: {data.title}</p>
+        {userRole && (
+          <button type='button' className={s.buttonAddTitle} onClick={handleToggleEstimate}><Add width={"24"} height={"24"}/></button>
+        )}
+        
+        </div>
+        {data.description && <p className={s.address}>Адреса: {data.description}</p>}
 
-          {data.estimates && data.estimates.map(item => (
-            <div key={item._id}>
-              <div className={s.buttonAddContainer}>
-              <p className={s.titleTable}>{item.title}</p>
-              {userRole && (<>
-               <button type='button' className={s.buttonAddTitle} onClick={() => onDeleteEstimate(data?._id, item?._id)}>
-                <Delete width={"24"} height={"24"}/>
-                </button>
-                <button className={s.buttonUpdateEstimate}
-                onClick={() => updateEstimate(data?._id, item?._id, item?.title)}>
-                  <Update width='28' height='28'/>
-                    </button>
-              </>)}
-              
-              
-              </div>     
-              
-              <table className={s.iksweb}>
-                <tbody>
-                <tr className={s.titleRow}>
-           <td className={s.oneRow}>№ з/п.</td>
-                 <td className={s.twoRow}>Назва 
-                 {userRole && (
-                 <button type='button' onClick={() => data && item._id && handleTogglePosition(item._id, data._id)} className={s.buttonAdd}>
-                 <Add width={"24"} height={"24"}/>
-                </button> 
-                 )}
-                 </td>
-                 <td className={s.threeRow}><p className={s.threeRowTitleText}>Одиниця</p></td>
-                 <td className={s.threeRow}><p className={s.threeRowTitleText}>Кількість</p></td>
-                 <td className={s.threeRow}><p className={s.threeRowTitleText}>Ціна в грн.</p></td>
-                 <td className={s.threeSix}>Сума в грн.</td>
-             </tr>
+        {data.estimates && data.estimates.map(item => (
+          <div key={item._id}>
+            <div className={s.buttonAddContainer}>
+            <p className={s.titleTable}>{item.title}</p>
+            {userRole && (<>
+             <button type='button' className={s.buttonAddTitle} onClick={() => onDeleteEstimate(data?._id, item?._id)}>
+              <Delete width={"24"} height={"24"}/>
+              </button>
+              <button className={s.buttonUpdateEstimate}
+              onClick={() => updateEstimate(data?._id, item?._id, item?.title)}>
+                <Update width='28' height='28'/>
+                  </button>
+            </>)}
+            
+            
+            </div>     
+            
+            <table className={s.iksweb}>
+              <tbody>
+              <tr className={s.titleRow}>
+         <td className={s.oneRow}>№ з/п.</td>
+               <td className={s.twoRow}>Назва 
+               {userRole && (
+               <button type='button' onClick={() => data && item._id && handleTogglePosition(item._id, data._id)} className={s.buttonAdd}>
+               <Add width={"24"} height={"24"}/>
+              </button> 
+               )}
+               </td>
+               <td className={s.threeRow}><p className={s.threeRowTitleText}>Одиниця</p></td>
+               <td className={s.threeRow}><p className={s.threeRowTitleText}>Кількість</p></td>
+               <td className={s.threeRow}><p className={s.threeRowTitleText}>Ціна в грн.</p></td>
+               <td className={s.threeSix}>Сума в грн.</td>
+           </tr>
 
-                  {item.positions &&
-                    item.positions.map(({ _id, id, title, unit, price, number, result, isShow = false, isDelete = false }, index) => (
-                <tr key={_id} className={s.dataRow}>
-                <td className={s.oneRow}>
-                  {index + 1}
-                  {userRole && (
-                    <button  
-                  className={s.buttonUpdate}
-                  onClick={() => {
-                    isShow = !isShow;
-                    addIsToggle(_id, isShow, 'update');
-                    if(!isShow) {
-                       handleSubmit(data._id, item._id, id, {title, unit, number, price})
-                    }
-                    }}
-                  >
-                    {isShow ? (<UpdateOk width='22' height='22'/>) :
-                    (<Update width='22' height='22'/>)
-                    }
-                  
-                  </button> 
-                  )}
-                 
-                  </td>
-                <td>
-                {!isShow ? 
-                (<p>{title}</p>) : 
-                (<input id={_id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange}/>)
-                }</td>                 
-                <td className={s.threeRow}>{!isShow ? 
-                (<p>{unit}</p>) : 
-                (<input id={_id} name='unit'  className={s.input} value={unit} disabled={!isShow} onChange={onChange}/>)
-                }</td>
-                <td className={s.threeRow}>
-                {!isShow ? 
-                (<p>{number}</p>) :
-                (<input id={_id} name='number' className={s.input} value={number} disabled={!isShow} onChange={onChange}/>)}
-                 </td>
-               
-                <td className={s.threeRow}>
-                    {!isShow ? 
-                (<p>{price}</p>) :
-                (<input id={_id} name='price' className={s.input} value={price} disabled={!isShow} onChange={onChange}/>)
-                }</td>
-                <td className={s.threeSix}>
-                  {result}
-                  {userRole && (
-                   <button className={s.buttonDeletePosition} 
-                  onClick={() => {
-                    isDelete = !isDelete;
-                    addIsToggle(_id, isDelete, 'delete');
+                {item.positions &&
+                  item.positions.map(({ _id, id, title, unit, price, number, result, isShow = false, isDelete = false }, index) => (
+              <tr key={_id} className={s.dataRow}>
+              <td className={s.oneRow}>
+                {index + 1}
+                {userRole && (
+                  <button  
+                className={s.buttonUpdate}
+                onClick={() => {
+                  isShow = !isShow;
+                  addIsToggle(_id, isShow, 'update');
+                  if(!isShow) {
+                     handleSubmit(data._id, item._id, id, {title, unit, number, price})
                   }
-                  }>
-                    <Delete width={"20"} height={"20"}/>
-                  </button>  
-
-                 )}
-
-                {isDelete && (
-                  <div className={s.deleteModalContainer}>
-                    <h4>{`Ви справді бажаєте видалити: ${title}`}</h4>
-                    <ul className={s.buttonContainer }>
-                        <li><button
-                        className={s.onDelete}
-                        onClick={() => {
-                            isDelete = !isDelete;
-                            addIsToggle(_id, isDelete, 'delete');
-                            deletePositionFn(item._id, data._id,  id)
-                        }}
-                        >Так</button></li>
-                        <li><button
-                        className={s.noDelete}
-                        onClick={() => {
-                            isDelete = !isDelete;
-                            addIsToggle(_id, isDelete, 'delete');
-                        }}
-                        >Ні</button></li>
-                    </ul>
-                </div>   
+                  }}
+                >
+                  {isShow ? (<UpdateOk width='22' height='22'/>) :
+                  (<Update width='22' height='22'/>)
+                  }
+                
+                </button> 
                 )}
-                              
-                  </td>
-                      </tr>
-                    ))}
+               
+                </td>
+              <td>
+              {!isShow ? 
+              (<p>{title}</p>) : 
+              (<input id={_id} name='title' className={s.inputTitle} value={title} disabled={!isShow} onChange={onChange}/>)
+              }</td>                 
+              <td className={s.threeRow}>{!isShow ? 
+              (<p>{unit}</p>) : 
+              (<input id={_id} name='unit'  className={s.input} value={unit} disabled={!isShow} onChange={onChange}/>)
+              }</td>
+              <td className={s.threeRow}>
+              {!isShow ? 
+              (<p>{number}</p>) :
+              (<input id={_id} name='number' className={s.input} value={number} disabled={!isShow} onChange={onChange}/>)}
+               </td>
+             
+              <td className={s.threeRow}>
+                  {!isShow ? 
+              (<p>{price}</p>) :
+              (<input id={_id} name='price' className={s.input} value={price} disabled={!isShow} onChange={onChange}/>)
+              }</td>
+              <td className={s.threeSix}>
+                {result}
+                {userRole && (
+                 <button className={s.buttonDeletePosition} 
+                onClick={() => {
+                  isDelete = !isDelete;
+                  addIsToggle(_id, isDelete, 'delete');
+                }
+                }>
+                  <Delete width={"20"} height={"20"}/>
+                </button>  
 
-                  <tr className='title-row'>
-                    <td colSpan='5'>Всього:</td>
-                    <td className={s.threeSix}>{item.total}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          ))}
-        </>
-      )}
+               )}
 
-      <div className={s.total}>
-        <p>Загальна сума: </p>
-        {data && <p>{data.total}</p>}
-      </div>
+              {isDelete && (
+                <div className={s.deleteModalContainer}>
+                  <h4>{`Ви справді бажаєте видалити: ${title}`}</h4>
+                  <ul className={s.buttonContainer }>
+                      <li><button
+                      className={s.onDelete}
+                      onClick={() => {
+                          isDelete = !isDelete;
+                          addIsToggle(_id, isDelete, 'delete');
+                          deletePositionFn(item._id, data._id,  id)
+                      }}
+                      >Так</button></li>
+                      <li><button
+                      className={s.noDelete}
+                      onClick={() => {
+                          isDelete = !isDelete;
+                          addIsToggle(_id, isDelete, 'delete');
+                      }}
+                      >Ні</button></li>
+                  </ul>
+              </div>   
+              )}
+                            
+                </td>
+                    </tr>
+                  ))}
 
-      
-        <div className={s.total}>
-          <p>Витрачено на матеріали:</p>
-          {data?.materialsTotal && (
-        <p>{data?.materialsTotal}</p> )}
-      </div> 
-     
-      
-         <div className={s.total}>
-          <p>Аванс:            </p>
-          {data?.advancesTotal && (
-        <p>{data?.advancesTotal}</p>)}
-      </div>
-      
-      
-       <div div className={s.total}>
-        <p>До оплати:</p>
-        {data?.general && (
-        <p>{data?.general}</p>)}
-      </div> 
-      
-      
-     
-     
-      {showPosition && (
-       <Modal><AddPosition isShowModal={handleTogglePosition} add={addFunction} /></Modal> 
-      )}
+                <tr className='title-row'>
+                  <td colSpan='5'>Всього:</td>
+                  <td className={s.threeSix}>{item.total}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        ))}
+      </>
+    )}
 
-       {updateEstimateModal && (
-       <Modal><UpdateEstimate isShowModal={handleToggleUpdateEstimate} idData={newUpdateEstimate} /></Modal> 
-      )}
-
-      {showEstimate && (<Modal><AddEstimate idData={id} isShowModal={handleToggleEstimate}/></Modal>)}
-      
-      
-      
+    <div className={s.total}>
+      <p>Загальна сума: </p>
+      {data && <p>{data.total}</p>}
     </div>
+
+    
+      <div className={s.total}>
+        <p>Витрачено на матеріали:</p>
+        {data?.materialsTotal && (
+      <p>{data?.materialsTotal}</p> )}
+    </div> 
+   
+    
+       <div className={s.total}>
+        <p>Аванс:            </p>
+        {data?.advancesTotal && (
+      <p>{data?.advancesTotal}</p>)}
+    </div>
+    
+    
+     <div div className={s.total}>
+      <p>До оплати:</p>
+      {data?.general && (
+      <p>{data?.general}</p>)}
+    </div> 
+    
+    
+   
+   
+    {showPosition && (
+     <Modal><AddPosition isShowModal={handleTogglePosition} add={addFunction} /></Modal> 
+    )}
+
+     {updateEstimateModal && (
+     <Modal><UpdateEstimate isShowModal={handleToggleUpdateEstimate} idData={newUpdateEstimate} /></Modal> 
+    )}
+
+    {showEstimate && (<Modal><AddEstimate idData={id} isShowModal={handleToggleEstimate}/></Modal>)}
+    
+    
+    
+  </div>
+  )
+}
+</>
+    
   );
 }
 
 export default ProjectItem;
 
-//deletePositionFn(item._id, data._id,  id)
