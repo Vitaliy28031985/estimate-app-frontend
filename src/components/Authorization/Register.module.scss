@@ -43,6 +43,7 @@ color: #0B69A3;
 }
 
 .label {
+    display: block;
     margin-left: 10px;
     margin-bottom: 10px;
     color: var(--Blue-Grey-Blue-Grey-700, #334E68);
@@ -54,6 +55,52 @@ color: #0B69A3;
         font-size: 30px;
     }
 }
+
+.inputPasswordContainer {
+    position: relative;
+    width: 250px;
+    height: 30px;
+    margin-bottom: 20px;
+    @media screen and (min-width: 768px) {
+        width: 600px;
+        height: 35px;
+    } 
+    @media screen and (min-width: 1200px) {
+        width: 700px;
+        height: 40px;
+    } 
+}
+.inputPasswordContainerButton {
+    position: absolute;
+    top: 6px;
+    left: 10px;
+    border-color: transparent;
+    background: transparent;
+    color: #BEC0C7;
+
+    &:hover, &:focus {
+        opacity: 0.7;
+    }
+}
+.inputPasswordContainer svg {
+    fill: currentColor;
+}
+.inputPasswordContainer  input {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding-left: 30px;
+    margin-bottom: 20px;
+    color: var(--Blue-Grey-Blue-Grey-400, #829AB1);
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 15px;
+background: var(--Blue-Grey-Blue-Grey-050, #F0F4F8);
+   
+}
+
 .input {
     width: 250px;
     height: 30px;
@@ -75,6 +122,7 @@ background: var(--Blue-Grey-Blue-Grey-050, #F0F4F8);
     height: 40px;
 }    
 }
+
 
 .button {
     width: 280px;

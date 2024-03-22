@@ -68,10 +68,10 @@ let estimateId = '';
 let positionId = '';
 
 
-  if (error) {
-    return <div>Помилка завантаження проекту</div>;
-  }
-
+//   if (error) {
+//     return <div>Помилка завантаження проекту</div>;
+//   }
+// console.log(error);
   const handleTogglePosition = async (idEst, idPro) => {
       if(!showPosition) {
     idOne =  await idEst;
@@ -239,7 +239,7 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
 
   return (
     <>
-    {project === undefined ? (<ForbiddenPage/>) : 
+    {error ? (<ForbiddenPage/>) : 
   ( 
     <div>
     <ul className={s.linksList}>
