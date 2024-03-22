@@ -99,7 +99,6 @@ return (
             <label for="password" className={s.label}>Пароль</label>
             <div className={s.inputPasswordContainer}>
             <input id="password" type={showPassword} name="password"
-            // className={s.input}
             onChange={handleChange}
             value={password}
             />

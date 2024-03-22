@@ -6,6 +6,7 @@ import {projectsApi} from "../../redux/projectSlice/projectSlice";
 import { useGetProjectByIdQuery } from '../../redux/projectSlice/projectSlice';
 import Close from '../Icons/Close/Close';
 import s from './Allow.module.scss';
+import "../../App.module.scss"
 
 function Allow({ isShowModal, allowFu, id}) {
   const dispatch = useDispatch();
@@ -85,6 +86,10 @@ if(name === "notAllow") {
  isShowModal(); 
   };
 
+const buttonNotAllowState = !emailNotAllow === "" ? "one" : "two";
+
+console.log(buttonNotAllowState);
+
   return (
     <div className={s.container}>
       <button className={s.closeButton} type="button" onClick={isShowModal}>
@@ -103,7 +108,7 @@ if(name === "notAllow") {
             value={emailAllow}
           />
         </div>
-        <button disabled={emailAllow === ""} className={s.button}>Надати дозвіл</button>
+        <button disabled={emailAllow === ""} className={emailAllow === "" ? "button-disabled" : "button"}>Надати дозвіл</button>
       </form>
 </div>
 <div className={s.formContainer}>
@@ -114,11 +119,11 @@ if(name === "notAllow") {
       <select className={s.input}  name="emailNotAllow" id="emailNotAllow" onChange={handleChange}>
           {userEmailList?.map(email =>
            (<option value={email} >{email}</option>))}
-          <option value="empty" selected>Вибери email для видалення</option>
+          <option value="" selected>Вибери email для видалення</option>
           </select>
         </div>
 
-        <button disabled={emailNotAllow === ""} className={s.button}>Забрати дозвіл</button>
+        <button disabled={emailNotAllow === ""} className={emailNotAllow === "" ? "button-disabled" : "button"}>Забрати дозвіл</button>
       </form>
 </div>
     </div>
