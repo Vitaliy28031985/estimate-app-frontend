@@ -8,7 +8,7 @@ import s from './ProjectItem.module.scss';
 
 function ProjectItemCustomer() {
   const { id } = useParams();
-  const { data: project} = useGetProjectByIdQuery(id);
+  const { data: project, error } = useGetProjectByIdQuery(id);
   const [data, setData] = useState(project);
  
 
@@ -81,7 +81,7 @@ const generatePdf = () => {
 
   return (
     <>
-    {project === undefined ? (<ForbiddenPage/>) : 
+    {error ? (<ForbiddenPage/>) : 
   (
     <div>
     <ul className={s.linksList}>

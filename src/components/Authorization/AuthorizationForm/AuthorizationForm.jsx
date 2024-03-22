@@ -4,6 +4,7 @@ import {priceApi} from "../../../redux/price/priceApi";
 import {projectsApi} from "../../../redux/projectSlice/projectSlice";
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Block from "../../Icons/Block/Block"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import s from "../Register.module.scss";
@@ -13,6 +14,7 @@ import s from "../Register.module.scss";
 function AuthorizationForm({showRegister, forModal}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState("password")
 
 
     const dispatch = useDispatch();
@@ -23,6 +25,13 @@ function AuthorizationForm({showRegister, forModal}) {
       email
     };
 
+    const changeTypePassword = () => {
+      if(showPassword === "password") {
+        setShowPassword("text");
+      } else {
+        setShowPassword("password");
+      }
+    }
 
 
     const handleChange = e => {
@@ -56,9 +65,10 @@ function AuthorizationForm({showRegister, forModal}) {
             dispatch(setCredentials(dataAnswers));
             dispatch(projectsApi.util.resetApiState());
             dispatch(priceApi.util.resetApiState());
+            toast(`Користувача з Email: ${email} успішно увійшов в систему!`)
 
           } catch (error) {
-            alert(`User with the email: ${email} does not exist!`, error);
+            toast.error(`Користувача з Email: ${email} не існує, або Ви ввели невірний пароль!`, error);
           }
     console.log({email, password});
     setEmail('')
@@ -77,20 +87,24 @@ return (
         onSubmit={handleSubmit}
         >
             <div>
-            <p className={s.label}>Email</p>
+            <label for="email" className={s.label}>Email</label>
             <input type="email" name="email"
+            id="email"
             className={s.input}
             onChange={handleChange}
             value={email}
             />
             </div>
             <div>
-            <p className={s.label}>Пароль</p>
-            <input type="password" name="password"
-            className={s.input}
+            <label for="password" className={s.label}>Пароль</label>
+            <div className={s.inputPasswordContainer}>
+            <input id="password" type={showPassword} name="password"
+            // className={s.input}
             onChange={handleChange}
             value={password}
             />
+            <button className={s.inputPasswordContainerButton} onClick={changeTypePassword} type="button"><Block width={"24"} height={"24"}/></button>
+            </div>
             </div>
             
             <button className={s.button}>Увійти</button>
