@@ -54,6 +54,8 @@ function UpdateProject({isShowModal, getDataProject}) {
    isShowModal()
     }
 
+    const disabled = title === '' && description === '';
+
 return(
     <div className={s.container}>
     <ToastContainer draggable={true} />
@@ -77,7 +79,7 @@ return(
             value={description}
             />
         </div>
-        <button className={s.button}>Обновити кошторис</button>
+        <button disabled={disabled} className={disabled ? "button-disabled" : "button"}>Обновити кошторис</button>
        </form>
     </div>
 )

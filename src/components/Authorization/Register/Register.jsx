@@ -113,6 +113,8 @@ const loginEl = {
     }
     }
 
+    const disabled = name === '' && email === '' && role === '' && password === '' && passwordTwo === '' && phone === '';
+
 return (
     
         <div>
@@ -180,7 +182,7 @@ return (
             <button className={s.inputPasswordContainerButton} onClick={changeTypePassword} type="button"><Block width={"24"} height={"24"}/></button>
             </div>
             </div>
-            <button className={s.button}>Зареєструватися</button>
+            <button disabled={disabled} className={disabled ? "button-disabled" : "button"}>Зареєструватися</button>
         </form>
         </div>
     

@@ -47,12 +47,12 @@ function AddPrice({isShowModal}) {
      const handleSubmit = async e => {
                 e.preventDefault();
         if( title === '' || price === '') {
-            toast("Заповніть усі поля");
+            toast.error("Заповніть усі поля");
             return
         }
 
         if (data.find(data => data.title === title)) {
-            toast("Таке найменування роботи вже існує");
+            toast.error("Таке найменування роботи вже існує");
             setTitle('')
             setPrice('')
             return;
@@ -71,8 +71,6 @@ function AddPrice({isShowModal}) {
    isShowModal()
     }
 
-
-//voice rider
 
 
 const setupRecognition = () => {
@@ -116,6 +114,8 @@ const setupRecognition = () => {
     };
   }
 
+  const disabled = title === '' && price === '';
+
 return(
     <div className={s.container}>
         
@@ -147,7 +147,7 @@ return(
             value={price}
             />
         </div>
-        <button id='submit' className={s.button}>Додати в прайс</button>
+        <button id='submit' disabled={disabled} className={disabled ? "button-disabled" : "button"}>Додати в прайс</button>
        </form>
     </div>
 )

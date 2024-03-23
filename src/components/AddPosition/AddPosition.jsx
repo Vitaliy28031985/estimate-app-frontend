@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Close from "../Icons/Close/Close";
 import Select from "./Select/Select";
 import Input from "./Input/Input";
@@ -19,9 +17,6 @@ function AddPosition({isShowModal, add}) {
 <button className={s.closeButton} type="button" onClick={isShowModal}>
        <Close width={"24"} height={"24"}/>
     </button>
-
-<ToastContainer draggable={true} />
-
 
 
 {!toggleForm ? (<Select  isShowModal={isShowModal} add={add}/>) : (<Input isShowModal={isShowModal} add={add}/>)}

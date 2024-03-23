@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAddEstimateMutation } from '../../redux/estimate/estimateApi';
 import {projectsApi} from "../../redux/projectSlice/projectSlice";
@@ -27,26 +27,23 @@ function AddEstimate({ isShowModal, idData }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title) {
-      toast('Заповніть усі поля');
-      return;
-    }
-
+ 
     const newEstimate = { id: idData, estimates: { title: title || '' } };
     try {
       await addEstimate(newEstimate);
       dispatch(projectsApi.util.resetApiState());
+      toast(`Таблицю ${title} додано`)
     } catch (error) {
-      console.error('Error adding estimate:', error);
+      toast.error('Error adding estimate:', error);
     }
 
     setTitle('');
     isShowModal();
   };
+  const disabled = title === '';
 
   return (
     <div className={s.container}>
-      <ToastContainer draggable={true} />
       <button className={s.closeButton} type="button" onClick={isShowModal}>
         <Close width={'24'} height={'24'} />
       </button>
@@ -62,7 +59,7 @@ function AddEstimate({ isShowModal, idData }) {
           />
         </div>
 
-        <button className={s.button}>Додати</button>
+        <button disabled={disabled} className={disabled ? "button-disabled" : "button"}>Додати</button>
       </form>
     </div>
   );

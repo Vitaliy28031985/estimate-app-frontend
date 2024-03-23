@@ -28,14 +28,13 @@ function AddUnit({ isShowModal}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title) {
-      toast('Заповніть усі поля');
+      toast.error('Заповніть усі поля');
       return;
     }
 
     const newEstimate = { title: title || '' };
     try {
       await addUnit(newEstimate);
-    //   dispatch(projectsApi.util.resetApiState());
     } catch (error) {
       console.error('Error adding unit:', error);
     }
@@ -43,6 +42,8 @@ function AddUnit({ isShowModal}) {
     setTitle('');
     isShowModal();
   };
+
+  const disabled = title === '';
 
   return (
     <div className={s.container}>
@@ -62,7 +63,7 @@ function AddUnit({ isShowModal}) {
           />
         </div>
 
-        <button className={s.button}>Додати</button>
+        <button disabled={disabled} className={disabled ? "button-disabled" : "button"}>Додати</button>
       </form>
     </div>
   );

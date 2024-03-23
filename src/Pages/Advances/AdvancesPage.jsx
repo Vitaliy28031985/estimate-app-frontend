@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {useCurrentQuery} from "../../redux/auth/authApi";
 import AdvancesItem from '../../components/AdvancesItem/AdvancesItem';
 import AdvancesItemCustomer from '../../components/AdvancesItem/AdvancesItemCustomer';
@@ -17,6 +19,7 @@ function Advances() {
 }, [userData, userRole]); 
     return (
         <div>
+            <ToastContainer draggable={true} />
             {userRole ? (<AdvancesItem/>) : (<AdvancesItemCustomer/>)}
         </div>
     )

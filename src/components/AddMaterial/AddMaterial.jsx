@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useParams} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAddMaterialMutation} from '../../redux/material/materialApi';
 import {projectsApi} from "../../redux/projectSlice/projectSlice";
@@ -47,7 +47,7 @@ function AddEstimate({ isShowModal}) {
         !date  ||
         !sum
         ) {
-      toast('Заповніть усі поля');
+      toast.error('Заповніть усі поля');
       return;
     }
 
@@ -59,21 +59,23 @@ function AddEstimate({ isShowModal}) {
     
     } };
     try {
-      await addMaterial(newMaterial);
-      dispatch(projectsApi.util.resetApiState());
-     setTitle('');
+    await addMaterial(newMaterial);
+    dispatch(projectsApi.util.resetApiState());
+    setTitle('');
     setOrder('');
     setDate('');
     setSum('');
-    isShowModal(); 
+    isShowModal();
+    toast(`Чек з №: ${order} успішно додано!`) 
     } catch (error) {
-      console.error('Error adding material:', error);
+      toast.error('Error adding material:', error);
     }  
   };
 
+  const disabled =   title === '' &&  order === '' &&  date   === '' &&  sum  === '';
+
   return (
     <div className={s.container}>
-      <ToastContainer draggable={true} />
       <button className={s.closeButton} type="button" onClick={isShowModal}>
         <Close width={'24'} height={'24'} />
       </button>
@@ -123,7 +125,7 @@ function AddEstimate({ isShowModal}) {
           />
         </div>
 
-        <button className={s.button}>Додати</button>
+        <button disabled={disabled} className={disabled ? "button-disabled" : "button"}>Додати</button>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Close from '../Icons/Close/Close';
 import {useAddProjectsMutation, useGetProjectsQuery} from "../../redux/projectSlice/projectSlice";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import s from "./AddProject.module.scss";
 
@@ -33,12 +33,12 @@ function AddProject({isShowModal}) {
         e.preventDefault();
 
         if( title === '' || description === '') {
-            toast("Заповніть усі поля");
+            toast.error("Заповніть усі поля");
             return
         }
 
         if (data.find(data => data.title === title)) {
-            toast("Таке найменування роботи вже існує");
+            toast.error(`Кошторис ${title} вже існує`);
             setTitle('')
             setDescription('')
             return;
@@ -47,19 +47,21 @@ function AddProject({isShowModal}) {
         try {
     const newProject = {title, description}
          addProjects(newProject);
+         toast(`Кошторис ${title} успішно створено` );
            
             
           } catch (error) {
-            alert(`User with the title: ${title} does not exist!`, error);
+            toast.error(`User with the title: ${title} does not exist!`, error);
           }
     setTitle('')
     setDescription('')
    isShowModal()
     }
 
+    const disabled = title === '' && description === '';
+
 return(
     <div className={s.container}>
-    <ToastContainer draggable={true} />
     <button className={s.closeButton} type="button" onClick={isShowModal}>
        <Close width={"24"} height={"24"}/>
     </button>
@@ -80,7 +82,7 @@ return(
             value={description}
             />
         </div>
-        <button className={s.button}>Додати кошторис</button>
+        <button disabled={disabled} className={disabled ? "button-disabled" : "button"}>Додати кошторис</button>
        </form>
     </div>
 )

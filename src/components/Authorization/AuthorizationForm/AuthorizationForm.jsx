@@ -53,11 +53,11 @@ function AuthorizationForm({showRegister, forModal}) {
      const handleSubmit = async e => {
         e.preventDefault();
         if( email === '' || password === '') {
-            toast("Заповніть усі поля")
+            toast.error("Заповніть усі поля")
             return
         }
         if(password.length < 6) {
-            toast("введіть пароль з 6 і більше символів")
+            toast.error("введіть пароль з 6 і більше символів")
             return
         }
         try {
@@ -77,6 +77,10 @@ function AuthorizationForm({showRegister, forModal}) {
         showRegister();  
       }
     }
+
+    const disabled = email === '' && password === '';
+
+   
 
 return (
     
@@ -106,7 +110,7 @@ return (
             </div>
             </div>
             
-            <button className={s.button}>Увійти</button>
+            <button disabled={disabled} className={disabled ? "button-disabled" : "button"}>Увійти</button>
         </form>
         </div>
     
