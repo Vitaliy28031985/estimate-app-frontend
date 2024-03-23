@@ -38,18 +38,20 @@ function Input({isShowModal, add}) {
  const handleSubmit = async e => {
   e.preventDefault();
   if(unit === '' || number === '' || title === '' || price === '') {
-    toast("Усі поля мають бути заповнені")
+    toast.error("Усі поля мають бути заповнені")
     return;
   } 
-const newPosition = {title, unit, number: Number(number), price: Number(price)}
+// const newPosition = {title, unit, number: Number(number), price: Number(price)}
 await add({title, unit, number: Number(number), price: Number(price)})
-    console.log(newPosition)
+  
     setTitle('');
     setNumber('');
     setUnit('');
     isShowModal();
+    toast(`Позицію ${title} успішно додано`)
 }
  
+const disabled = unit === '' && number === '' && title === '' && price === '';
 
     return(
 
@@ -71,7 +73,7 @@ await add({title, unit, number: Number(number), price: Number(price)})
   <input className={s.input} type="number" value={price} name="price" onChange={handleChange} />
 </div>
 
-<button className={s.button}>Додати</button>
+<button disabled={disabled} className={disabled ? "button-disabled" : "button"}>Додати</button>
 </form>
 
     )

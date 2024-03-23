@@ -45,8 +45,8 @@ const filteredContacts =  data?.filter(item =>
  const handleSubmit = async e => {
   
   e.preventDefault();
-  if(title === 'empty' || unit === '' || number === '' || title === '') {
-    toast("Усі поля мають бути заповнені")
+  if(title === '' || unit === '' || number === '' || title === '') {
+    toast.error("Усі поля мають бути заповнені")
     return;
   }
 
@@ -61,9 +61,10 @@ await add({title, unit, number: Number(number), price: priceCurrent})
     setNumber('');
     setUnit('');
     isShowModal();
+    toast(`Позицію ${title} успішно додано`)
 }
  
-
+const disabled = unit === '' && number === '' && title === '';
     return(
 <>
 <input onChange={filterChange} value={filter} type="text" className={s.input} placeholder='Пошук з прайсу' />
@@ -74,7 +75,7 @@ await add({title, unit, number: Number(number), price: priceCurrent})
    <option value={title} >{title}</option>
   
 ))}
- <option value="empty" selected>Вибери вид роботи</option>
+ <option value="" selected>Вибери вид роботи</option>
 </select>
 <div>
   <label for='unit' className={s.label}>Одиниця</label>
@@ -84,14 +85,14 @@ await add({title, unit, number: Number(number), price: priceCurrent})
    <option value={title} >{title}</option>
   
 ))}
- <option value="empty" selected>Вибери одиницю виміру</option>
+ <option value="" selected>Вибери одиницю виміру</option>
 </select>
 </div>
 <div>
   <label for="number" className={s.label}>Кількість</label>
   <input className={s.input} type="number" value={number} name="number" id='number' onChange={handleChange} />
 </div>
-<button className={s.button}>Додати</button>
+<button disabled={disabled} className={disabled ? "button-disabled" : "button"}>Додати</button>
 </form>
 </>
     )

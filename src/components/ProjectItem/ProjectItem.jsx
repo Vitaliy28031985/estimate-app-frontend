@@ -16,7 +16,7 @@ import UpdateEstimate from "../UpdateEstimate/UpdateEstimate";
 import ForbiddenPage from '../../Pages/Forbidden/ForbiddenPage';
 import s from './ProjectItem.module.scss';
 import Modal from '../Modal/Modal';
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Update from '../Icons/Update/UpdateIcon';
 import UpdateOk from '../Icons/Update/UpdateOk';
@@ -68,10 +68,7 @@ let estimateId = '';
 let positionId = '';
 
 
-//   if (error) {
-//     return <div>Помилка завантаження проекту</div>;
-//   }
-// console.log(error);
+
   const handleTogglePosition = async (idEst, idPro) => {
       if(!showPosition) {
     idOne =  await idEst;
@@ -95,7 +92,6 @@ const addFunction = async(position) => {
   const newPosition = {idEst: currentId.idEst, idPos: currentId.idPos, position: position}
   await addPosition(newPosition);
   dispatch(projectsApi.util.resetApiState());
-  toast("Позицію додано");
 }
 
 const deletePositionFn = async (idEst, idPro, idPos) => {
@@ -247,7 +243,6 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
       <li className={s.buttonNav}><NavLink className={s.buttonNavLink} to={`/materials/${data?._id}`}>Матеріали</NavLink></li>
       <li className={s.buttonNav}><NavLink className={s.buttonNavLink} to={`/advances/${data?._id}`}>Аванс</NavLink></li>
     </ul>
-    <ToastContainer draggable={true} />
     <button className={s.createPdfFileButton} onClick={generatePdf}>Створити PDF файл</button>
     {data && (
       <>

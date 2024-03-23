@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useParams} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAddAdvanceMutation} from '../../redux/advances/advancesApi';
 import {projectsApi} from "../../redux/projectSlice/projectSlice";
@@ -43,7 +43,7 @@ function AddAdvance({ isShowModal}) {
         !date  ||
         !sum
         ) {
-      toast('Заповніть усі поля');
+      toast.error('Заповніть усі поля!');
       return;
     }
 
@@ -55,21 +55,22 @@ function AddAdvance({ isShowModal}) {
     } };
    
     try {
-      await addAdvance(newAdvance);
-      dispatch(projectsApi.util.resetApiState());
-
-     setComment('');
+    await addAdvance(newAdvance);
+    dispatch(projectsApi.util.resetApiState());
+    setComment('');
     setDate('');
     setSum('');
-    isShowModal(); 
+    isShowModal();
+    toast(`Позицію ${comment} додано!`) 
     } catch (error) {
-      console.error('Error adding advance:', error);
+      toast.error('Error adding advance:', error);
     }  
   };
 
+  const disabled = comment === '' && date === '' && sum ==='';
+
   return (
     <div className={s.container}>
-      <ToastContainer draggable={true} />
       <button className={s.closeButton} type="button" onClick={isShowModal}>
         <Close width={'24'} height={'24'} />
       </button>
@@ -108,7 +109,7 @@ function AddAdvance({ isShowModal}) {
           />
         </div>
 
-        <button className={s.button}>Додати</button>
+        <button disabled={disabled} className={disabled ? "button-disabled" : "button"}>Додати</button>
       </form>
     </div>
   );
