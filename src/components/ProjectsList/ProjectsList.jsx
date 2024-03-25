@@ -136,8 +136,8 @@ const addIsToggle = (id, currentIsShow) => {
   
  
    </ul>
-   {showProject && ( <Modal><AddProject isShowModal={handleToggleProject}/></Modal>)}
-   {showUpdateModal && ( <Modal><UpdateProject isShowModal={handleToggleUpdateModal} getDataProject={newData}/></Modal>)}
+   {showProject && ( <Modal onModal={handleToggleProject}><AddProject isShowModal={handleToggleProject}/></Modal>)}
+   {showUpdateModal && ( <Modal onModal={handleToggleUpdateModal}><UpdateProject isShowModal={handleToggleUpdateModal} getDataProject={newData}/></Modal>)}
      </div>
     );
   }

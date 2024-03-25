@@ -137,10 +137,11 @@ table.iksweb th {
         border-color: transparent;
         border-radius: 50%;
         color:#486581;
+        transition: color 250ms background 250ms  cubic-bezier(0.4, 0, 0.2, 1); 
     
         &:hover, &:focus {
         color: #fff;
-          background: #347c99;   
+        background: #347c99;   
         }
     }
     
@@ -155,7 +156,8 @@ table.iksweb th {
         padding-right: 10px;
         padding-left: 10px;
         background-color: #0b131a;
-        border-radius: 5px; 
+        border-radius: 5px;
+        transition: border-radius 250ms background-color 250ms  cubic-bezier(0.4, 0, 0.2, 1);  
            
         &:hover, &:focus {
         background-color: #347c99;
@@ -215,6 +217,7 @@ table.iksweb th {
 .onDelete {
     border: 1px solid red;
     color: red;
+    transition: color 250ms background 250ms  cubic-bezier(0.4, 0, 0.2, 1); 
     &:hover, &:focus {
         color: #F0F4F8;
         background: red;  
@@ -223,7 +226,8 @@ table.iksweb th {
 
 .noDelete {
     border: 1px solid #04D361;
-    color: #04D361; 
+    color: #04D361;
+    transition: color 250ms background 250ms  cubic-bezier(0.4, 0, 0.2, 1);  
     &:hover, &:focus {
         color: #F0F4F8;
         background: #04D361;  

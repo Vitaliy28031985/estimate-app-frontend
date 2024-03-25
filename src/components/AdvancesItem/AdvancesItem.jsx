@@ -192,7 +192,7 @@ const onChange = (e) => {
                   </tr>
                 </tbody>
               </table>
-              {isShowAdd && (<Modal><AddAdvance isShowModal={handleToggleAdd }/></Modal>)}
+              {isShowAdd && (<Modal onModal={handleToggleAdd}><AddAdvance isShowModal={handleToggleAdd }/></Modal>)}
         </div>
     )
 }

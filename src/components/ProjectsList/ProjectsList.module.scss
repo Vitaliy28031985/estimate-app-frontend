@@ -48,7 +48,7 @@ font-weight: 500;
     border-color: transparent;
 }
 .projectDescription {
-    margin-bottom: 10px;
+margin-bottom: 10px;
 font-family: Inter;
 font-size: 22px;
 font-weight: 400;
@@ -102,6 +102,7 @@ color: #FFF;
     border-color: transparent;
     margin-right: 5px;
     color: #334E68;
+    transition: color 250ms background 250ms  cubic-bezier(0.4, 0, 0.2, 1); 
     @media screen and (min-width: 768px) {
         margin-right: 20px;  
     } 
@@ -154,6 +155,7 @@ color: #FFF;
 .onDelete {
     border: 1px solid red;
     color: red;
+    transition: color 250ms background 250ms  cubic-bezier(0.4, 0, 0.2, 1); 
     &:hover, &:focus {
         color: #F0F4F8;
         background: red;  
@@ -163,6 +165,7 @@ color: #FFF;
 .noDelete {
     border: 1px solid #04D361;
     color: #04D361; 
+    transition: color 250ms background 250ms  cubic-bezier(0.4, 0, 0.2, 1); 
     &:hover, &:focus {
         color: #F0F4F8;
         background: #04D361;  

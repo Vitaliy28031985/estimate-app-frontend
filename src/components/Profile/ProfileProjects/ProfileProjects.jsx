@@ -72,7 +72,7 @@ function ProfileProjects() {
             ))}
             
         </ul>
-        {showModal && ( <Modal><Allow isShowModal={handleToggleModal} allowFu={allowSubmit} id={idPro}/></Modal>)}
+        {showModal && ( <Modal onModal={handleToggleModal}><Allow isShowModal={handleToggleModal} allowFu={allowSubmit} id={idPro}/></Modal>)}
     </div>  
     )
    

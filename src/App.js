@@ -31,7 +31,7 @@ function App() {
   
     <div>
       <Header showRegister={handleToggleRegister}/>
-      {showRegister && (<Modal><Authorization showRegister={handleToggleRegister} forModal={true}/></Modal>) }
+      {showRegister && (<Modal onModal={handleToggleRegister}><Authorization showRegister={handleToggleRegister} forModal={true}/></Modal>) }
       
       <div className={s.container}>
       <Suspense fallback={<LoaderComponent/>}>

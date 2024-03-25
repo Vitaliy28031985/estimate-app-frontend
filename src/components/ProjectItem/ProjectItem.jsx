@@ -415,14 +415,14 @@ const handleSubmit = async (projId, estId, posId, updatePosition) => {
    
    
     {showPosition && (
-     <Modal><AddPosition isShowModal={handleTogglePosition} add={addFunction} /></Modal> 
+     <Modal onModal={handleTogglePosition}><AddPosition isShowModal={handleTogglePosition} add={addFunction} /></Modal> 
     )}
 
      {updateEstimateModal && (
-     <Modal><UpdateEstimate isShowModal={handleToggleUpdateEstimate} idData={newUpdateEstimate} /></Modal> 
+     <Modal onModal={handleToggleUpdateEstimate}><UpdateEstimate isShowModal={handleToggleUpdateEstimate} idData={newUpdateEstimate} /></Modal> 
     )}
 
-    {showEstimate && (<Modal><AddEstimate idData={id} isShowModal={handleToggleEstimate}/></Modal>)}
+    {showEstimate && (<Modal onModal={handleToggleEstimate}><AddEstimate idData={id} isShowModal={handleToggleEstimate}/></Modal>)}
     
     
     

@@ -167,7 +167,7 @@ const onChange = (e) => {
 		
 	</tbody>
 </table>
-{showModal && (<Modal><AddPrice isShowModal={handleToggleAddPrice}/></Modal>)}
+{showModal && (<Modal onModal={handleToggleAddPrice}><AddPrice isShowModal={handleToggleAddPrice}/></Modal>)}
 
 <div>
 <table className={s.iksweb}>
@@ -194,7 +194,7 @@ const onChange = (e) => {
         </tbody>
 </table>
 </div>
-{showAddUnit && (<Modal><AddUnit isShowModal={handleToggleAddUnit}/></Modal>)}
+{showAddUnit && (<Modal onModal={handleToggleAddUnit}><AddUnit isShowModal={handleToggleAddUnit}/></Modal>)}
      </div>
     );
   }
