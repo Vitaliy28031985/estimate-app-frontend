@@ -199,7 +199,7 @@ const onChange = (e) => {
                 </tbody>
               </table>
 
-{isShowAdd && (<Modal><AddEstimate isShowModal={handleToggleAdd }/></Modal>)}
+{isShowAdd && (<Modal onModal={handleToggleAdd}><AddEstimate isShowModal={handleToggleAdd }/></Modal>)}
 
         </div>
     )
